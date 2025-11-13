@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>내 페이지 타이틀</title>
+    </head>
+    <body>
+        <h1>입력폼 만들기</h1>
+        <label>아이디</label>
+        <input type="text"><br>
+        <label>비밀번호</label>
+        <input type="password"><br>
+        <input type="button" value="로그인">
+        <hr>
+        <h1>선택박스</h1>
+        <h2>과목고르기</h2>
+        <p>라디오버튼은 "name"을 중심으로 그중에 하나만 선택가능</p>
+        <p>value값은 서버로 전송할 때 보내질 글자임. 태그가 감싸는 내용은 화면에 보이지는 내용임.</p>
+        <input type="radio" name="subject" value="국어">국어
+        <input type="radio" name="subject" value="수학">수학
+        <input type="radio" name="subject" value="영어">영어
+        <input type="radio" name="subject" value="과학">과학
+        <h2>과일고르기</h2>
+        <input type="radio" name="fruit" value="ap">사과
+        <input type="radio" name="fruit" value="st">딸기
+        <input type="radio" name="fruit" value="wa">수박
+        <input type="radio" name="fruit" value="gr">포도
+        <h2>설문조사폼</h2>
+        <input type="radio" name="q1" value="1">매우불만족
+        <input type="radio" name="q1" value="2">불만족
+        <input type="radio" name="q1" value="3">보통
+        <input type="radio" name="q1" value="4">만족
+        <input type="radio" name="q1" value="5">매우만족
+        <h2>체크박스</h2>
+        <p>여러개 선택가능</p>
+        <input type="checkbox" name="food" value="f1">돈까스
+        <input type="checkbox" name="food" value="f2">떡볶이
+        <input type="checkbox" name="food" value="f3">김밥
+        <h1>풀다운메뉴</h1>
+        <select>
+            <option>콜라</option>
+            <option>제로콜라</option>
+            <option>사이다</option>
+            <option>환타</option>
+            <option>봉봉</option>
+        </select>
+        <h2>아래항목에서 여러개 보여지게 만들기&여러개 선택하기</h2>
+        <select size="3" multiple>
+            <option>콜라</option>
+            <option>제로콜라</option>
+            <option>사이다</option>
+            <option>제로사이다</option>
+            <option>환타</option>
+            <option>봉봉</option>  
+            <option>레몬에이드</option>
+            <option>블루레몬에이드</option>
+        </select>
+    </body>
+</html>
