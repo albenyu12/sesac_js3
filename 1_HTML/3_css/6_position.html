@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Document</title>
+        <style>
+            div{
+                width: 200px;
+                height: 100px;
+                border: 2px dashed aqua;
+                margin: 10px;
+            }
+            .move{
+                background-color: coral;
+                position: relative; 
+                /* absolute와 relative 비교해보기 */
+                top: 50px;
+                left: 100px;
+            }
+            .txt{
+                position: relative;
+                top:20px;
+                left: 400px;
+                color: navy;
+            }
+            .pic{
+                width: 300px;
+                height: 500px;
+                background-image: url(images/cat.jpeg);
+                background-size: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>절대위치와 상대위치</h1>
+        <div>1</div>
+        <div class="move">2</div>
+        <div>3</div>
+        <div class="pic"><p class="txt">귀여운 고양이</p></div>
+    </body>
+</html>
