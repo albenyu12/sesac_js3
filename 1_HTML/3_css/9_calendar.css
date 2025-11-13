@@ -1,0 +1,30 @@
+.header{
+    text-align: center;
+}
+.week{
+    width: 14%;
+    padding: 14px;
+    background-color: #dcdcdc;
+}
+.sun{
+    color: red;
+}
+.sat{
+    color: blue;
+}
+td{
+    border: 1px solid grey;
+    text-align: center;
+    padding: 14px;
+}
+table{
+    border: 1px solid grey; 
+    width: 100%;
+    border-collapse: collapse;
+}
+th{
+    border: 1px solid grey;
+}
+img{
+    width: 100%;
+}
