@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+            animation-name: moveLeft;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 2;
+            position: relative;
+        }
+
+        @keyframes moveLeft {
+            0% {
+                left: 0;
+            }
+            50% {
+                left: 200px;
+            }
+            100% {
+                left: 0px;
+            }
+        }
+        .text{
+            color:rgb(232, 127, 255);
+            animation-name: fadeOut;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-delay: 2s;;
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .circle{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(235, 38, 61);
+            border-radius: 50%;
+            color: aliceblue;
+            text-align: center;
+            animation-name: rotatedAndScale;
+            animation-duration: 3s;
+        }
+        @keyframes rotatedAndScale {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.5);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+        .img {
+            width: 30%;
+            animation-name: shake;
+            animation-duration: .1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateX(10px) rotate(5deg);
+            }
+            25% {
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <hr>
+    <p class="text">Fadeout 애니메이션</p>
+    <hr>
+    <p class="circle">동그라미</p>
+    <hr>
+    <img class="img" src="images/cat.jpeg">
+</body>
+</html>

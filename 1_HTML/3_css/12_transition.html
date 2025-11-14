@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            transition-property: width, height; 
+            transition-duration: 2s;
+        }
+        .square:hover {
+            width: 250px;
+            height: 150px;
+        }
+        .button {
+            color: black;
+            transition-property: color;
+            transition-duration: .5s;
+            transition-timing-function: ease-in-out;
+        }
+        .button:hover {
+            color: red;
+        }
+        .img {
+            width: 200px;
+            transition-property: transform;
+            transition-duration: 3s;
+        }
+        .img:hover {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="square"></div>
+    <hr>
+    <button class="button">Hover me</button>
+    <hr>
+    <img class="img" src="images/cat.jpeg" alt="고양이 사진">
+</body>
+</html>
