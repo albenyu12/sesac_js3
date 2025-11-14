@@ -2,20 +2,26 @@
     box-sizing: border-box;
 }
 body{
-    display: block;
-    background-color: black;
+    display: flex;
+    justify-self: center;
+    align-content: center;
+    /* background-color: black; */
+    background-image: url(images/bg.png);
+    background-size: cover;
     color: white;
     text-align: center;
-    width: 320px;
 }
 form{
     background-color: #ffffff2b;
+    backdrop-filter: blur(12px);
     padding: 32px; 
     border-radius: 8px;
     border:1px solid #ffffff2b;
+    min-width: 320px;
+    margin-top: 40px;
 }
 input{
-    background-color: #ffffff16;
+    background-color: #ffffff2b;
     color: #ffffff;
     display: block;
     border-width: 0px;
@@ -41,6 +47,13 @@ button{
     display: flex;
     justify-content: center;
     gap: 6px;
+    transition: width, height;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+}
+button:hover, #btn:hover{
+    background-color: #aaaaaa2b;
+    color: #ffffff;
 }
 .sns{
     display: flex;
@@ -48,11 +61,13 @@ button{
 }
 #btn{
     background-color: #ffffff;
-    color: #434343;
+    color: #000000;
     font-weight: 600;
     margin-top: 24px;
+    transition: width, height;
+    transition-duration: 1s;
 }
 .logo{
-    width: 14%;
+    width: 14px;
     padding-bottom: 2px;
 }
