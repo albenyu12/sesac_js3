@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>새싹 자리 바꾸기</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 네비게이션 바 -->
+  <header class="navbar">
+    <div class="navbar-left">새싹</div>
+    <button class="shuffle-btn" id="shuffleButton">자리 바꾸기</button>
+  </header>
+
+  <!-- 셔플 중 스피너 -->
+  <div id="spinner" class="spinner hidden">
+    <div class="loader"></div>
+    <span>셔플 중...</span>
+  </div>
+
+  <!-- 교실 영역 -->
+  <main class="main">
+    <section class="classroom">
+      <h2 class="classroom-title">자리 배치</h2>
+
+      <!-- 3칸 × 5줄 / 13명 -->
+      <div class="desk-grid">
+        <div class="desk"></div><div class="desk"></div><div class="desk"></div>
+        <div class="desk"></div><div class="desk"></div><div class="desk"></div>
+        <div class="desk"></div><div class="desk"></div><div class="desk"></div>
+        <div class="desk"></div><div class="desk"></div><div class="desk"></div>
+        <!-- 마지막 자리 (오른쪽 끝) -->
+        <div class="desk"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
