@@ -4,8 +4,6 @@
 body{
     display: flex;
     justify-self: center;
-    align-content: center;
-    /* background-color: black; */
     background-image: url(images/bg.png);
     background-size: cover;
     color: white;
