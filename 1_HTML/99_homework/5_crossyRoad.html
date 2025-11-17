@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Crossy Road</title>
+  <link rel="stylesheet" href="5_crossyRoad.css">
+</head>
+<body>
+  <div id="hud">
+    <div id="scoreboard">
+      <span>Score: <span id="score">0</span></span>
+      <span>Best: <span id="best">0</span></span>
+    </div>
+  </div>
+
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+  <div id="instructions">Press Any Arrow Key to Start</div>
+
+  <div id="gameOverScreen" class="hidden">
+    <h2>Game Over</h2>
+    <p>Score: <span id="finalScore">0</span></p>
+    <p>Best: <span id="finalBest">0</span></p>
+    <button id="restartBtn">Restart</button>
+  </div>
+
+  <script src="5_crossyRoad.js"></script>
+</body>
+</html>
