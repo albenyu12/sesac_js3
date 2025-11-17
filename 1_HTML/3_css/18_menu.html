@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+        }
+        h1{
+            color: teal;
+        }
+        .nav {
+            display: flex;
+        }
+        .nav .item {
+            text-align: center;
+            border-bottom: 4px solid teal;
+            width: 80px;
+            margin: 8px;
+            margin-bottom: 0;
+            padding: 4px;
+            transition-property: border-bottom;
+            transition-duration: .2s;
+            transition-timing-function: ease-in-out;
+        }
+        .item:hover {
+            border-color: tomato;
+        }
+        #login {
+            border: 0;
+            border-radius: 4px;
+            transition-property: background-color color;
+            transition-duration: .2s;
+            transition-timing-function: ease-in-out;
+        }
+        #login:hover {
+            background-color: tomato;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <h1>Logo</h1>
+        <div class="nav">
+            <div class="item">menu1</div>
+            <div class="item">menu2</div>
+            <div class="item">menu3</div>
+            <div class="item">menu4</div>
+            <button class="item" id="login">Login</button>
+        </div>
+    </header>
+</body>
+</html>

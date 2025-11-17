@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        .container {
+            position: relative;
+            height: 400px;
+        }
+        .box1, .box2 {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            opacity: .5;
+            background-color: #0000ff;
+            color: #ffffff;
+            font-weight: 700;
+            position: absolute;
+        }
+        .overlay {
+            z-index: 2;
+            top: 200px;
+            background-color: #00ff00;
+        }
+        .box1:hover {
+            z-index: 5;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">
+            상단내용
+        </div>
+        <div class="box2 overlay">
+            하단내용
+        </div>
+    </div>
+</body>
+</html>
