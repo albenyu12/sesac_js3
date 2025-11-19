@@ -16,8 +16,16 @@ form {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     padding: 80px;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+header p {
+    color: #6b6b6b;
 }
 a {
     text-decoration: none;
@@ -87,6 +95,10 @@ button:hover {
     width: 14px;
     height: 14px;
 }
+.dropdown {
+    position: relative;
+    width: 100%;
+}
 .dropdownBtn {
     display: flex;
     justify-content: space-between;
@@ -97,9 +109,40 @@ button:hover {
     padding: 16px;
     border-radius: 12px;
     width: 100%;
+    cursor: pointer;
+}
+.dropdownBtn:active ~ .dropdownContents, .dropdownContents:hover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    background-color: #e9e9e9;
+    top: 0px;
+    width: 100%;
+    border-radius: 12px;
 }
 .dropdownContents {
     display: none;
+    top: -200px;
+}
+.content {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #cdcdcd;
+    color: #000000;
+    font-size: 14px;
+    padding: 16px;
+    width: 100%;
+    cursor: pointer;
+}
+.content:first-child {
+    border: 0;
+}
+.dropdownBtn:active ~ .dropdownContents img, .dropdownContents:hover img {
+    transform: rotate(.5turn);
 }
 .checkBox {
     display: flex;
@@ -112,5 +155,9 @@ input[type="checkbox"] {
     accent-color: #0499FF;
 }
 .checkBoxContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     width: 100%;
+    color: #6b6b6b;
 }
