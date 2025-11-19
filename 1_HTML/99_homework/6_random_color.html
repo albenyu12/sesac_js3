@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            font-family: 'IBM Plex Sans';
+            border: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 120px;
+            gap: 24px;
+        }
+        h1 {
+            font-family: 'Lobster 1.4';
+            font-size: 48px;
+        }
+        #hexCode {
+            font-size: 24px;
+        }
+        h1:hover, #hexCode:hover {
+            color: #ffffff;
+        }
+        button {
+            background-color: #ffffffeb;
+            border: 1px solid #cdcdcd8b;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 200px;
+            padding: 12px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        button:hover {
+            background-color: #ffffffab;
+        }
+        button:active {
+            background-color: #ffffff4b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Color Picker</h1>
+    <div id="hexCode">Every click is new</div>
+    <button onclick="getHexCode(0, 16)">click!</button>
+
+    <script>
+        let randomHexDigit = document.getElementById("hexCode");
+        let hexDigit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+        
+        function getRandomHexDigit(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            randomDigit = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+            return hexDigit[randomDigit];
+        }
+        
+        function getHexCode(min, max) {
+            let randomColor = '#';
+            randomHexDigit.innerHTML = '#';
+            for (i=0; i<6; i++) {
+                let digit = getRandomHexDigit(min, max);
+                randomHexDigit.innerHTML += digit;
+                randomColor += digit;
+            }
+            document.body.style.backgroundColor = randomColor;
+        }
+    </script>
+</body>
+</html>

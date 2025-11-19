@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <h1>랜덤 헥사 코드 버튼</h1>
+    <button onclick="getHexCode(0, 16)">click</button>
+    <div id="hexCode"></div>
+
+    <script>
+        let randomHexDigit = document.getElementById("hexCode");
+        let hexDigit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+        
+        function test() {
+            // 0 이상 1 미만의 난수 생성
+            console.log(Math.random());
+            // array에 숫자랑 문자랑 같이 있어도 상관없음 확인
+            console.log(hexDigit[10]);
+        }
+        
+        // 0~15 사이의 정수 난수 1개 콘솔 입력
+        function getRandomInt(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            randomNum = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+            console.log(randomNum);
+        }
+
+        // 0 ~ f 중 하나 랜덤 뽑기
+        function getRandomHexDigit(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            randomDigit = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+            return hexDigit[randomDigit];
+        }
+
+        // 고럼 위에를 6번 반복해서 출력하면 되겠네!
+        function getHexCode(min, max) {
+            randomHexDigit.innerHTML = '#';
+            for (i=0; i<6; i++) {
+                let digit = getRandomHexDigit(min, max);
+                randomHexDigit.innerHTML += digit;
+            }
+        }
+    </script>
+</body>
+</html>
