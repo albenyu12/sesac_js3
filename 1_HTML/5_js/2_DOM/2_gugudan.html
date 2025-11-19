@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>구구단 콘솔</h1>
+    <input id="userInput" type="number" placeholder="원하는 단을 입력하시오">
+    <!-- 사용자가 입력한 값을 어떻게 가져오지? -->
+    <button onclick="gugudan()">구구단 출력</button>
+    <div id="result"></div>
+
+    <!-- 위는 HTML로 정해진 문법과 표현에 따라 각종 표현기법을 정의하는 곳 -->
+    <!-- 아래는 프로그래밍 언어로 각종 연산을 내맘대로 하는 곳 -->
+    <script>
+        function gugudan() {
+            // 내가 여기에서 미리 사용자가 HTML 코드 어딘가에 입력한 글자를 가져와야함
+            let dan = document.getElementById("userInput");
+            console.log(dan);
+
+            let dan_input = dan.value;
+            console.log(dan_input);
+
+            let result = document.getElementById("result");
+            result.innerHTML = " "
+
+            for(let i=1; i<=9; i++){
+                console.log(dan_input + ' × ' + i + ' = ' + dan_input*i);
+                // 이제 결과를 어떻게 document에 찍을까?
+                // document.write(dan_input + ' × ' + i + ' = ' + dan_input*i + "<br>");
+                let result = document.getElementById("result");
+                console.log(result);
+                // result.textContent += dan_input + ' × ' + i + ' = ' + dan_input*i + '<br>';
+                result.innerHTML += dan_input + ' × ' + i + ' = ' + dan_input*i + '<br>';
+            }
+        }
+
+    </script>
+</body>
+</html>
