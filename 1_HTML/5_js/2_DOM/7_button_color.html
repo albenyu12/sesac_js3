@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #header {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="header">hello DOM button</h1>
+    <button onclick="changeColorWarm()">change red</button>
+    <button onclick="changeColorCool()">change blue</button>
+    <button onclick="resetColor()">reset color</button>
+
+    <script>
+        let heading = document.getElementById('header');
+        function changeColorWarm() {
+            // console.log('색상변경');
+            // let heading = document.getElementById('header');
+            // console.log('heading');
+            heading.style.color = 'red';
+            heading.style.backgroundColor = 'yellow';
+            heading.style.width = '300px';
+        }
+        function changeColorCool() {
+            heading.style.color = 'blue';
+            heading.style.backgroundColor = 'cyan';
+            heading.style.width = '500px';
+        }
+        function resetColor() {
+            heading.style = 'none';
+        }
+    </script>
+</body>
+</html>

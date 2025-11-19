@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello DOM</h1>
+    <button onclick="sayHello()">hello</button>
+    <div id="printHelloBold"></div>
+    <div id="printHello"></div>
+    <script>
+        function sayHello() {
+            let result = document.getElementById("printHelloBold");
+            let result2 = document.getElementById("printHello");
+
+            result.innerHTML='<b>say hello<b>';
+            result2.textContent ='say hello';
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello DOM</h1>
+    <button onclick="sayHello()">hello</button>
+    <div id="printHello"></div>
+    <script>
+        function sayHello() {
+
+            printHello.textContent ='say hello';
+        }
+    </script>
+</body>
+</html>
