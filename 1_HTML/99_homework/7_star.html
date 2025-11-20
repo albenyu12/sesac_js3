@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>star</h1>
+    <pre><div id='star'></div></pre>
+
+    <script>
+        let starList = document.getElementById('star');
+        // 왼쪽 삼각형
+        function printStar1() {
+            for(let count = 1; count <= 5; count++) {
+                for (let num = 1; num < count + 1; num++) {
+                    starList.innerHTML += '*';
+                    console.log('*');
+                }
+                starList.innerHTML += '<br>';
+                console.log('');
+            }
+        }
+        
+        //왼쪽 역삼각형
+        function printStar2() {
+            for(let count = 1; count <= 5; count++) {
+                for (let num = 5; num >= count; num = num - 1) {
+                    starList.innerHTML += '*';
+                }
+                for (let spaceCount = 1; spaceCount <= count; spaceCount++) {
+                    starList.innerHTML += ' ';
+                }
+                starList.innerHTML += '<br>';
+            }
+        }
+        
+        // 오른쪽 삼각형
+        function printStar3() {
+            for(let count = 1; count <= 5; count++) {
+                for (let spaceCount = 5; spaceCount >= count; spaceCount = spaceCount = spaceCount - 1) {
+                    starList.innerHTML += ' ';
+                }
+                for (let num = 1; num <= count; num++) {
+                    starList.innerHTML += '*';
+                }
+                starList.innerHTML += '<br>';
+            }
+        }
+        
+        // 오른쪽 역삼각형
+        function printStar4() {
+            for(let count = 1; count <= 5; count++) {
+                for (let num = 1; num <= count; num++) {
+                    starList.innerHTML += '&nbsp';
+                }
+                for (let num = 5; num >= count; num = num - 1) {
+                    starList.innerHTML += '*';
+                }
+                starList.innerHTML += '<br>';
+            }
+        }
+
+        printStar4();
+    </script>
+</body>
+</html>
