@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>star</h1>
+    <input id="userInput" type="number">
+    <button onclick="printStar3()">print</button>
+    <pre><div id="star"></div></pre>
+
+    <script>
+        let starList = document.getElementById("star");
+        let lineInput = document.getElementById("userInput");
+        
+        // 왼쪽 삼각형
+        function printStar1() {
+            let lineNum = lineInput.value;
+            starList.innerHTML = "";
+            
+            for(let count = 1; count <= lineNum; count++) {
+                for (let num = 1; num < count + 1; num++) {
+                    starList.innerHTML += "*";
+                }
+                starList.innerHTML += "<br>";
+            }
+            console.log(starList);
+        }
+        
+        //왼쪽 역삼각형
+        function printStar2() {
+            let lineNum = lineInput.value;
+            starList.innerHTML = "";
+
+            for(let count = 1; count <= lineNum; count++) {
+                for (let num = lineNum; num >= count; num = num - 1) {
+                    starList.innerHTML += "*";
+                }
+                for (let spaceCount = 1; spaceCount <= count; spaceCount++) {
+                    starList.innerHTML += " ";
+                }
+                starList.innerHTML += "<br>";
+            }
+        }
+        
+        // 오른쪽 삼각형
+        function printStar3() {
+            let lineNum = lineInput.value;
+            starList.innerHTML = "";
+
+            for(let count = 1; count <= lineNum; count++) {
+                for (let spaceCount = lineNum; spaceCount >= count; spaceCount = spaceCount = spaceCount - 1) {
+                    starList.innerHTML += ' ';
+                }
+                for (let num = 1; num <= count; num++) {
+                    starList.innerHTML += '*';
+                }
+                starList.innerHTML += '<br>';
+            }
+        }
+        
+        // 오른쪽 역삼각형
+        function printStar4() {
+            let lineNum = lineInput.value;
+            starList.innerHTML = "";
+
+            for(let count = 1; count <= lineNum; count++) {
+                for (let num = 1; num <= count; num++) {
+                    starList.innerHTML += "&nbsp";
+                }
+                for (let num = lineNum; num >= count; num = num - 1) {
+                    starList.innerHTML += "*";
+                }
+                starList.innerHTML += "<br>";
+            }
+        }
+    </script>
+</body>
+</html>
