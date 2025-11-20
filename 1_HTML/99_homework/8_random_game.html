@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Guess the Number (1~100)</h1>
+    <input id="enterNum" type="number" placeholder="Enter your guess">
+    <button onclick="guessNum()">Enter</button>
+    <div id="guessResult"></div>
+    <h2>Game History</h2>
+    <div id="gameHistory"></div>
+
+    <script>
+        let printResult = document.getElementById("guessResult");
+        let printHistory = document.getElementById("gameHistory");
+
+        function getRandomInt(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+        }
+
+        let randomNum = getRandomInt(1, 101);
+        console.log(randomNum);
+        let count = 1;
+        
+        function guessNum() {
+            let userInput = Number(document.getElementById("enterNum").value);
+            
+            if (userInput == randomNum) {
+                printResult.innerHTML = "Correct!";
+                printHistory.innerHTML += count + ". You guessed " + userInput + ": Correct!"
+            } else {
+                if (userInput > randomNum){
+                    printResult.innerHTML = "Too high!";
+                    printHistory.innerHTML += count + ". You guessed " + userInput + ": Too high!"
+                } else if (userInput < randomNum){
+                    printResult.innerHTML = "Too low!";
+                    printHistory.innerHTML += count + ". You guessed " + userInput + ": Too low!"
+                }
+            }
+            printHistory.innerHTML += "<br>";
+            count++;s
+        }
+    </script>
+</body>
+</html>
+
+
