@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>버튼을 통한 숫자 제어</h1>
+    <div id="result">0</div>
+    <div>
+        <button onclick="decNum()">-1</button>
+        <button onclick="incNum()">+1</button>
+    </div>
+
+    <script>
+        let resultNum = document.getElementById("result");
+        
+        function incNum() {
+            // console.log('+1 버튼');
+            let currentNum = resultNum.innerText;
+            let incResult = Number(currentNum) + 1;
+            resultNum.innerHTML = incResult;
+        }
+        function decNum() {
+            // console.log('-1 버튼');
+            let currentNum = resultNum.innerText;
+            let decResult  = Number(currentNum) - 1;
+            resultNum.innerHTML = decResult;
+        }
+    </script>
+</body>
+</html>

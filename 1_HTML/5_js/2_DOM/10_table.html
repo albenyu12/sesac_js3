@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid #000000;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #000000;
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>테이블을 DOM으로 제어해보기</h1>
+    <table>
+        <tr>
+            <td>셀1</td>
+            <td>셀2</td>
+            <td>셀3</td>
+        </tr>
+        <tr>
+            <td>셀4</td>
+            <td>셀5</td>
+            <td>셀6</td>
+        </tr>
+        <tr>
+            <td>셀7</td>
+            <td>셀8</td>
+            <td>셀9</td>
+        </tr>
+        <tr>
+            <td>셀7</td>
+            <td>셀8</td>
+            <td>셀9</td>
+        </tr>
+    </table>
+    <button onclick='changeCellColor()'>셀 색상 모두 변경(핑크)</button>
+    <button onclick='changeEvenColor()'>짝수셀 색상 모두 변경(하늘)</button>
+    <button onclick='changeOddColor()'>홀수셀 색상 모두 변경(연두)</button>
+    <script>
+        function changeCellColor() {
+            let cells = document.getElementsByTagName('td');
+            console.log(cells);
+            // cells.style.backgroundColor = 'lightblue'  <- 불가능
+
+            for(let count = 0; count < cells.length; count++) {
+                cells[count].style.backgroundColor = 'lightpink';
+            }
+        }
+        
+        function changeEvenColor() {
+            let cells = document.getElementsByTagName('td');
+            
+            for(let count = 0; count < cells.length; count++) {
+                if (count%2 == 1) {
+                    cells[count].style.backgroundColor = 'lightblue';
+                } 
+            }
+        }
+
+        function changeOddColor() {
+            let cells = document.getElementsByTagName('td');
+            
+            for(let count = 0; count < cells.length; count++) {
+                if (count%2 == 0) {
+                    cells[count].style.backgroundColor = 'lightgreen';
+                } 
+            }
+        }
+    </script>
+</body>
+</html>

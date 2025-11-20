@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>for 문법 배우기</h1>
+    <script>
+        for (let i = 0; i < 5; i++) {
+            console.log(i);
+        }
+
+        let fruits = ["apple", "banana", "cherry"];
+        for (let i = 0; i < fruits.length; i ++) {
+            console.log(fruits[i]);
+        }
+
+        for (let fruit in fruits) {
+            console.log(fruit);
+        }
+
+        console.log("let f of ... 문법에서 앞에 let f는 변수");
+        for (let f in fruits) {
+            console.log(f);
+        }
+
+        console.log("let ... in xxx 문법");
+        for (let key in fruits) {
+            console.log(key);
+        }
+
+        console.log("let xxx in xxx 문법으로 목록을 가져오려면");
+        for (let key in fruits) {
+            console.log(fruits[key]);
+        }
+
+        
+        let person = {
+            name: "John",
+            age: 30,
+            city: "Seoul"
+        }
+        for (let key in person) {
+            console.log(key, ":", person[key]);
+        }
+
+        let numbers = [1, 2, 3, 4, 5];
+        
+        // 고차함수(High-order Function) : 인자를 함수로 받는 함수
+        numbers.forEach(function (num, index) {
+            console.log("Index: " + ", Value: " + num);
+        });
+        fruits.forEach(function (num, index) {
+            console.log("Index: " + ", Value: " + num);
+        });
+    </script>
+</body>
+</html>

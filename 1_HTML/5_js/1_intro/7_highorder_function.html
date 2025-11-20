@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>고차함수(High-order Function) : 인자를 함수로 받는 함수</h1>
+    <script>
+        // map, reduce, filter 등등
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+
+        let squares = numbers.map(
+            function square(num) {
+                return num * num;
+            }
+        )
+        
+        console.log(squares);
+        // 여기 위까지가 함수를 인자로 받는 고차함수
+
+        // 근데 이걸 구현하다보니 쓸때없는게 많아서 하나둘씩 없애면서 익명함수, 화살표함수
+        // 익명 함수
+        let square3 = numbers.map(
+            (num) => {
+                return num * num;
+            }
+        )
+        console.log(square3);
+        
+        let square4 = numbers.map((num) => num * num);
+        console.log(square4);
+        
+
+
+        let evenNumbers = numbers.filter((num) => num % 2 == 0);
+        console.log(evenNumbers);
+        
+        let oddNumbers = numbers.filter((num) => num % 2 == 1);
+        console.log(oddNumbers);
+
+        
+        </script>
+</body>
+</html>
