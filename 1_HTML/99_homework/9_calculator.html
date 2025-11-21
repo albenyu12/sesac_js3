@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            gap: 24px;
+        }
+        table {
+            font-family: "IBM Plex Sans";
+            font-size: 20px;
+            width:fit-content;
+            border: 1px solid #000000;
+            border-radius: 14px;
+            padding: 24px;
+            gap: 16px;
+        }
+        tr {
+            width: 100%;
+            row-gap: 16px;
+        }
+        td {
+            background-color: #e9e9e9;
+            border: 8px solid #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            outline: 1px solid #000000;
+            outline-offset: -8px;
+        }
+        tr:first-child td {
+            font-family: "E1234";
+            font-size: 40px;
+            padding: 8px;
+            padding-top: 12px;
+            padding-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>calculator</h1>
+    <table>
+        <tr>
+            <td id=result colspan="4">123</td>
+        </tr>
+        <tr>
+            <td>+</td>
+            <td>-</td>
+            <td>*</td>
+            <td>/</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>=</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>C</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+    </table>
+</body>
+</html>
