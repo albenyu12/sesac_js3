@@ -37,15 +37,25 @@
             padding: 32px;
             padding-top: 16px;
             padding-bottom: 16px;
-            outline: 1px solid #000000;
+            outline: 1px solid #cdcdcd;
             outline-offset: -8px;
         }
-        tr:first-child td {
+        td:hover {
+            background-color: #cdcdcd;
+        }
+        td:active {
+            background-color: #a6a6a8;
+            outline: 1px solid #79797b;
+        }
+        #result {
             font-family: "E1234";
             font-size: 40px;
             padding: 8px;
             padding-top: 12px;
             padding-bottom: 8px;
+        }
+        #result:hover {
+            background-color: #e9e9e9;
         }
     </style>
 </head>
@@ -53,32 +63,40 @@
     <h1>calculator</h1>
     <table>
         <tr>
-            <td id=result colspan="4">123</td>
+            <td id=result colspan="4">&nbsp;</td>
         </tr>
         <tr>
-            <td>+</td>
-            <td>-</td>
-            <td>*</td>
-            <td>/</td>
+            <td class="inputBtn" onclick="printInput()">+</td>
+            <td class="inputBtn" onclick="printInput()">-</td>
+            <td class="inputBtn" onclick="printInput()">*</td>
+            <td class="inputBtn" onclick="printInput()">/</td>
         </tr>
         <tr>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>=</td>
+            <td class="inputBtn" onclick="printInput()">7</td>
+            <td class="inputBtn" onclick="printInput()">8</td>
+            <td class="inputBtn" onclick="printInput()">9</td>
+            <td class="inputBtn" onclick="printInput()">=</td>
         </tr>
         <tr>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>C</td>
+            <td class="inputBtn" onclick="printInput()">4</td>
+            <td class="inputBtn" onclick="printInput()">5</td>
+            <td class="inputBtn" onclick="printInput()">6</td>
+            <td class="inputBtn" onclick="printInput()">C</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>0</td>
+            <td class="inputBtn" onclick="printInput()">1</td>
+            <td class="inputBtn" onclick="printInput()">2</td>
+            <td class="inputBtn" onclick="printInput()">3</td>
+            <td class="inputBtn" onclick="printInput()">0</td>
         </tr>
     </table>
+    <script>
+        let inputValue = document.getElementsByClassName("inputBtn");
+
+         function printInput() {
+            let userInput = inputValue[0].innerText;
+            console.log(userInput);
+         }
+    </script>
 </body>
 </html>
