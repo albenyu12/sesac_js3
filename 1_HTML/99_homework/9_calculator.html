@@ -20,7 +20,6 @@
         table {
             font-family: "IBM Plex Sans";
             font-size: 20px;
-            width:fit-content;
             border: 1px solid #000000;
             border-radius: 14px;
             padding: 24px;
@@ -66,36 +65,38 @@
             <td id=result colspan="4">&nbsp;</td>
         </tr>
         <tr>
-            <td class="inputBtn" onclick="printInput()">+</td>
-            <td class="inputBtn" onclick="printInput()">-</td>
-            <td class="inputBtn" onclick="printInput()">*</td>
-            <td class="inputBtn" onclick="printInput()">/</td>
+            <td class="inputBtn" onclick="printInput(0)">+</td>
+            <td class="inputBtn" onclick="printInput(1)">-</td>
+            <td class="inputBtn" onclick="printInput(2)">*</td>
+            <td class="inputBtn" onclick="printInput(3)">/</td>
         </tr>
         <tr>
-            <td class="inputBtn" onclick="printInput()">7</td>
-            <td class="inputBtn" onclick="printInput()">8</td>
-            <td class="inputBtn" onclick="printInput()">9</td>
-            <td class="inputBtn" onclick="printInput()">=</td>
+            <td class="inputBtn" onclick="printInput(4)">7</td>
+            <td class="inputBtn" onclick="printInput(5)">8</td>
+            <td class="inputBtn" onclick="printInput(6)">9</td>
+            <td class="inputBtn" onclick="printInput(7)">=</td>
         </tr>
         <tr>
-            <td class="inputBtn" onclick="printInput()">4</td>
-            <td class="inputBtn" onclick="printInput()">5</td>
-            <td class="inputBtn" onclick="printInput()">6</td>
-            <td class="inputBtn" onclick="printInput()">C</td>
+            <td class="inputBtn" onclick="printInput(8)">4</td>
+            <td class="inputBtn" onclick="printInput(9)">5</td>
+            <td class="inputBtn" onclick="printInput(10)">6</td>
+            <td class="inputBtn" onclick="printInput(11)">C</td>
         </tr>
         <tr>
-            <td class="inputBtn" onclick="printInput()">1</td>
-            <td class="inputBtn" onclick="printInput()">2</td>
-            <td class="inputBtn" onclick="printInput()">3</td>
-            <td class="inputBtn" onclick="printInput()">0</td>
+            <td class="inputBtn" onclick="printInput(12)">1</td>
+            <td class="inputBtn" onclick="printInput(13)">2</td>
+            <td class="inputBtn" onclick="printInput(14)">3</td>
+            <td class="inputBtn" onclick="printInput(15)">0</td>
         </tr>
     </table>
     <script>
         let inputValue = document.getElementsByClassName("inputBtn");
+        let outputValue = document.getElementById("result");
 
-         function printInput() {
-            let userInput = inputValue[0].innerText;
-            console.log(userInput);
+        function printInput(num) {
+            let userInput = inputValue[num].innerText;
+            
+            outputValue.innerText += userInput;
          }
     </script>
 </body>
