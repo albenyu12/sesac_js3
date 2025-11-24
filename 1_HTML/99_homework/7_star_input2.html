@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>star</h1>
+    <pre><div id="star"></div></pre>
+
+    <script>
+        let starList = document.getElementById("star");
+        
+        function printStar(line, direction) {
+            starList.innerHTML = "";
+            
+            if (direction == "left") {
+                for(let count = 1; count <= line; count++) {
+                for (let num = 1; num < count + 1; num++) {
+                    starList.innerHTML += "*";
+                }
+                starList.innerHTML += "<br>";
+            }
+            } else if (direction == "right") {
+                for(let count = 1; count <= line; count++) {
+                for (let spaceCount = line; spaceCount >= count; spaceCount = spaceCount = spaceCount - 1) {
+                    starList.innerHTML += ' ';
+                }
+                for (let num = 1; num <= count; num++) {
+                    starList.innerHTML += '*';
+                }
+                starList.innerHTML += '<br>';
+            }
+            } else if (direction == "downLeft") {
+                for(let count = 1; count <= line; count++) {
+                for (let num = line; num >= count; num = num - 1) {
+                    starList.innerHTML += "*";
+                }
+                for (let spaceCount = 1; spaceCount <= count; spaceCount++) {
+                    starList.innerHTML += " ";
+                }
+                starList.innerHTML += "<br>";
+            }
+            } else if (direction == "downRight") {
+                for(let count = 1; count <= line; count++) {
+                for (let num = 1; num <= count; num++) {
+                    starList.innerHTML += "&nbsp";
+                }
+                for (let num = line; num >= count; num = num - 1) {
+                    starList.innerHTML += "*";
+                }
+                starList.innerHTML += "<br>";
+            }
+            }
+        }
+
+        printStar(5, "downRight");
+        
+    </script>
+</body>
+</html>
