@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width:160px;
+        }
+        #progressBar {
+            width: 100%;
+            background-color: #e9e9e9;
+        }
+        #progress {
+            width: 1px;
+            height: 30px;
+            background-color: #00a838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progress Bar Timer</h1>
+    <input id="inputNum" type="number" placeholder="Enter seconds" min="0" max="10">
+    <button onclick="printResult()">start</button>
+    <button>reset</button>
+    <div id="progressBar">
+        <div id="progress"></div>
+    </div>
+    <script>
+        function printResult() {
+            let barWidth = document.getElementById("progress");
+            let userInput = document.getElementById("inputNum").value;
+            let timePassed = 0;
+
+                timerId = setInterval(() => {
+                    timePassed++;
+                    let progress = 100 / userInput*timePassed;
+                    barWidth.style.width = `${progress}%`;
+                    if (progress >= 100){
+                        clearInterval(timeId);
+                    }
+            }, 1000)
+            console.log(progress);
+        }
+    </script>
+</body>
+</html>
