@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 페이지의 요소를 가져올건데, 이게 다양한 브라우저에서, 성능 등을 고려해서, 언제 로딩이 끝날지 모름.
+        // 그래서 끝난 다음에 처리한다. 가 가장 기본이 되는 이벤트 핸들링
+
+        
+
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("나는 DOM준비가 완료되어서 이제 js를 실행할거야");
+            const heading = document.getElementById("title");
+            console.log(heading);
+        });
+
+        const heading = document.getElementById("title");
+        console.log(heading);
+    </script>
+    <h1 id="title">헬로우 DOM</h1>
+</body>
+</html>

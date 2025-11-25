@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>위치 정보</h1>
+    <button id="getLocation">내 위치정보는 </button>
+    <p id="location"></p>
+    <script>
+        document.getElementById("getLocation").addEventListener("click", () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    //위치를 가져왔을때의 콜백함수 내용이...
+                    console.log(position);
+                    const { latitude, longitude } = position.coords;
+                    document.getElementById("location").textContent = `위도: ${latitude}, 경도: ${longitude}`;
+                }, (error) => {
+                    document.getElementById("location").textContent = "정보를 가져오는데 실패했습니다."
+                })
+            } else {
+                document.getElementById("location").textContent = "해당 기능이 지원되지 않는 브라우저입니다. "
+            }
+        })
+    </script>
+</body>
+</html>

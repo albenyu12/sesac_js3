@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #content {
+            height: 2000px;
+            background: linear-gradient(to bottom, #ffcc00 0%, #ff6600 100%);
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        window.addEventListener("scroll", () => {
+            console.log("페이지 스크롤중");
+            const scrollPosition = window.pageYOffset;
+            console.log(`현재 스크롤 포지션: ${scrollPosition}`);
+            
+            const scrollPosition2 = document.documentElement.scrollTop;
+            console.log(`현재 스크롤 포지션: ${scrollPosition2}`);
+            
+            // 합치면
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            console.log(`현재 스크롤 포지션: ${scrollPosition2}`);
+            
+        })
+    </script>
+</body>
+</html>
