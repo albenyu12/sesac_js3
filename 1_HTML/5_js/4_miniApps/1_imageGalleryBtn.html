@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            height: 120px;
+            cursor: pointer;
+            display: none;
+        }
+        #display {
+            display: block;
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 갤러리</h1>
+    <div class="gallery">
+        <img id="display" src="images/photo-4.png"></img>
+        <img id="img1" src="images/photo-1.png">
+        <img id="img2" src="images/photo-2.png">
+        <img id="img3" src="images/photo-3.png">
+        <img id="img4" src="images/photo-4.png">
+    </div>
+    <div class="buttons">
+        <button id="prevBtn">이전</button>
+        <button id="nextBtn">다음</button>
+    </div>
+    <script>
+        const img1 = document.getElementById("img1");
+        const img2 = document.getElementById("img2");
+        const img3 = document.getElementById("img3");
+        const img4 = document.getElementById("img4");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const imgList = [img1, img2, img3, img4];
+        const display = document.getElementById("display");
+        let i = 0;
+        
+        nextBtn.addEventListener("click", () => {
+            count = i%imgList.length;
+            if (count < 0) {
+                display.src = imgList[-count].src;
+                i++;
+            } else {
+                display.src = imgList[count].src;
+                i++;
+            }
+        })
+        prevBtn.addEventListener("click", () => {
+            count = i%imgList.length;
+            if (i>=0){
+                display.src = imgList[count].src;
+                i = i - 1 ;
+            } else {
+                display.src = imgList[-count].src;
+                i = i - 1;
+            }
+        })
+        
+    </script>
+</body>
+</html>

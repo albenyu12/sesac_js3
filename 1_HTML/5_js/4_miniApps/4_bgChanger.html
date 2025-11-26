@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #colorCode {
+            font-size: 36px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="changeColorBtn">배경색 바꾸기</button>
+    <div id="colorCode"></div>
+
+    <script>
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+        
+        function getRandomHexCode() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+
+            const hexR = r.toString(16).padStart(2, "0");
+            const hexG = g.toString(16).padStart(2, "0");
+            const hexB = b.toString(16).padStart(2, "0");
+            return `#${hexR}${hexG}${hexB}`;
+        }
+
+        document.getElementById("changeColorBtn").addEventListener("click", () => {
+            const newColor = getRandomHexCode();
+            document.getElementById("colorCode").textContent = newColor;
+            document.body.style.backgroundColor = newColor;
+        })
+    </script>
+</body>
+</html>

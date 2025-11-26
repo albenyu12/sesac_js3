@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            height: 120px;
+            cursor: pointer;
+        }
+        #largeImg {
+            display: none;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 갤러리</h1>
+    <div class="gallery">
+        <img id="img1" src="images/photo-1.png">
+        <img id="img2" src="images/photo-2.png">
+        <img id="img3" src="images/photo-3.png">
+        <img id="img4" src="images/photo-4.png">
+    </div>
+    <img id="largeImg" src="" alt="큰 이미지">
+
+    <script>
+        const largeImg = document.getElementById("largeImg");
+        const img1 = document.getElementById("img1");
+        const img2 = document.getElementById("img2");
+        const img3 = document.getElementById("img3");
+        const img4 = document.getElementById("img4");
+
+        const imgList = [img1, img2, img3]
+        
+        imgList.forEach((img) => {
+            img.addEventListener("click", () => {
+            largeImg.src = img.src;
+            largeImg.style.display = "block"; 
+        })
+        })
+        
+    </script>
+</body>
+</html>
