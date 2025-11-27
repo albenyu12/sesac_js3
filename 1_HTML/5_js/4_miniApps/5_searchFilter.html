@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>동적 검색 필터</h1>
+    <input type="text" id="searchInput" placeholder="검색어를 입력하시오">
+    <ul id="itemList">
+        <li>apple</li>
+        <li>banana</li>
+        <li>grape</li>
+        <li>strawberry</li>
+        <li>orange</li>
+        <li>peach</li>
+        <li>plum</li>
+        <li>pineapple</li>
+        <li>cherry</li>
+        <li>lemon</li>
+        <li>lime</li>
+        <li>melon</li>
+        <li>watermelon</li>
+        <li>kiwi</li>
+        <li>mango</li>
+        <li>blueberry</li>
+        <li>raspberry</li>
+        <li>cranberry</li>
+        <li>grapefruit</li>
+        <li>pomegranate</li>
+        <li>apricot</li>
+        <li>coconut</li>
+        <li>persimmon</li>
+        <li>fig</li>
+        <li>pear</li>
+        <li>tangerine</li>
+        <li>hallabong</li>
+        <li>tangelo</li>
+        <li>dragon fruit</li>
+        <li>guava</li>
+        <li>papaya</li>
+        <li>passion fruit</li>
+        <li>star fruit</li>
+        <li>blackberry</li>
+        <li>boysenberry</li>
+        <li>mulberry</li>
+        <li>cantaloupe</li>
+        <li>honeydew</li>
+        <li>jackfruit</li>
+        <li>durian</li>
+        <li>date</li>
+        <li>lychee</li>
+        <li>longan</li>
+        <li>tamarind</li>
+        <li>gooseberry</li>
+        <li>bilberry</li>
+        <li>jabuticaba</li>
+        <li>rambutan</li>
+        <li>kumquat</li>
+        <li>soursop</li>
+    </ul>    
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const itemList = document.getElementById("itemList");
+        const items = itemList.getElementsByTagName("li");
+        const items2 = document.querySelectorAll("#itemList li");
+
+        console.log(items);
+        console.log(items2);
+
+        searchInput.addEventListener("keydown", () => {
+            const filter = searchInput.value;
+            // 방법1: for 
+            // for (let i = 0; i < items.length; i++) {
+            //     const item = items[i];
+            //     const text = item.textContent || item.innerHTML;
+    
+            //     if (text.includes(filter)) {
+            //         item.style.display = "";
+            //     } else {
+            //         item.style.display = "none";
+            //     }
+            // }
+
+            // 방법2: forEach - NodeList는 그냥 가능
+            // HTMLCollection은 Array로 변환해야함
+            // items2.forEach(item => {
+            Array.from(items).forEach(item => {
+                const text = item.textContent;
+                if (text.includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            })
+        })
+    </script>
+</body>
+</html>

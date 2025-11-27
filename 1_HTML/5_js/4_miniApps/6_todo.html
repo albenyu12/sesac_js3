@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            padding-left: 0;
+        }
+        li {
+            list-style-type: none;
+        }
+        img {
+            width: 24px;
+        }
+        #checkList {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>TO-DO LIST</h1>
+    <input type="text" id="newTodo" placeholder="Enter your task">
+    <button id="addTodo">Add</button>
+    <ul id="todoList"></ul>
+
+    <script>
+        // 1. 버튼 가져온다
+        const addBtn = document. getElementById("addTodo");
+        // 3. 입력 항목 가져온다
+        const newTodoInput = document.getElementById("newTodo");
+        const todoList = document.getElementById("todoList");
+        let listItem;
+        
+        function addTodo() {
+            if (newTodoInput.value.trim() == "") {
+                return;
+            } else {
+                const newTodo = newTodoInput.value;
+                // 4. 새로운 li를 만든다
+                listItem = document.createElement("li");
+                listItem.textContent = newTodo;
+                
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "delete";
+
+                const checkBox = document.createElement("input");
+                checkBox.type = "checkbox"
+
+                const checkList = document.createElement("div");
+                checkList.id = "checkList";
+                todoList.appendChild(checkList);
+
+                // 5. ul에 추가한다;
+                checkList.appendChild(checkBox);
+                checkList.appendChild(listItem);
+                listItem.appendChild(deleteBtn);
+
+                // 입력 항목 초기화
+                newTodoInput.value = "";
+
+                // 삭제 버튼 동작
+                deleteBtn.addEventListener("click", (ev) => {
+                    console.log("삭제 버튼 클릭");
+                    ev.target.parentElement.parentElement.remove();
+                })
+            }
+        }
+        
+
+        // 2. 버튼 클릭 동작시킨다
+        addBtn.addEventListener("click", () => {
+            addTodo();
+        })
+        
+        // Enter키 입력 시 todo 추가
+        newTodoInput.addEventListener("keypress", (ev) => {
+            if (ev.key == "Enter") {
+                addTodo();
+            } else {
+                return;
+            }
+        })
+        
+        // 생성된 li 클릭 시
+        todoList.addEventListener("click", (ev) => {
+            if (ev.target.style.textDecorationLine == "line-through") {
+                ev.target.style.textDecorationLine = "none";
+            } else {
+                // 취소선 생성
+                ev.target.style.textDecorationLine = "line-through";
+            }
+        })
+        </script>
+</body>
+</html>
