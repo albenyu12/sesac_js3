@@ -3,27 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
     <title>Document</title>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        h1{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+            cursor: default;
+        }
+        #todoContainer {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 240px;
+            padding: 24px;
+            margin-top: 40px;
+            border: 1px solid #cdcdcd;
+            border-radius: 16px;
+        }
+        form {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        input[type="text"] {
+            width: 100%;
+        }
         ul {
-            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-top: 16px;
+            gap: 4px;
+            height: 100%;
+            overflow: hidden;
+            overflow-y: scroll;
         }
         li {
             list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            gap: 4px;
         }
         img {
             width: 24px;
         }
         #checkList {
             display: flex;
+            gap: 8px;
+        }
+        button {
+            cursor: pointer;
+        }
+        #deleteBtn {
+            all: unset;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        i {
+            color: #cdcdcd;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
+        input[type="checkbox"]:checked ~ span {
+            text-decoration: line-through;
+        }
+        span {
+            cursor: default;
         }
     </style>
 </head>
 <body>
-    <h1>TO-DO LIST</h1>
-    <input type="text" id="newTodo" placeholder="Enter your task">
-    <button id="addTodo">Add</button>
-    <ul id="todoList"></ul>
+    <div id="todoContainer">
+        <h1>TO-DO LIST</h1>
+        <form>
+            <input type="text" id="newTodo" placeholder="Enter your task">
+            <button id="addTodo">Add</button>
+        </form>
+        <ul id="todoList"></ul>
+    </div>
 
     <script>
         // 1. 버튼 가져온다
@@ -40,21 +115,13 @@
                 const newTodo = newTodoInput.value;
                 // 4. 새로운 li를 만든다
                 listItem = document.createElement("li");
-                listItem.textContent = newTodo;
+                listItem.innerHTML = `<div id="checkList"><input type="checkbox"><span>${newTodo}</span></div>`;
                 
                 const deleteBtn = document.createElement("button");
-                deleteBtn.textContent = "delete";
+                deleteBtn.innerHTML = `<i class="ph ph-x"></i>`;
+                deleteBtn.id = "deleteBtn";
 
-                const checkBox = document.createElement("input");
-                checkBox.type = "checkbox"
-
-                const checkList = document.createElement("div");
-                checkList.id = "checkList";
-                todoList.appendChild(checkList);
-
-                // 5. ul에 추가한다;
-                checkList.appendChild(checkBox);
-                checkList.appendChild(listItem);
+                todoList.appendChild(listItem);
                 listItem.appendChild(deleteBtn);
 
                 // 입력 항목 초기화
@@ -67,29 +134,20 @@
                 })
             }
         }
-        
 
         // 2. 버튼 클릭 동작시킨다
-        addBtn.addEventListener("click", () => {
+        addBtn.addEventListener("click", (ev) => {
+            ev.preventDefault();
             addTodo();
         })
         
         // Enter키 입력 시 todo 추가
         newTodoInput.addEventListener("keypress", (ev) => {
             if (ev.key == "Enter") {
+                ev.preventDefault();
                 addTodo();
             } else {
                 return;
-            }
-        })
-        
-        // 생성된 li 클릭 시
-        todoList.addEventListener("click", (ev) => {
-            if (ev.target.style.textDecorationLine == "line-through") {
-                ev.target.style.textDecorationLine = "none";
-            } else {
-                // 취소선 생성
-                ev.target.style.textDecorationLine = "line-through";
             }
         })
         </script>
