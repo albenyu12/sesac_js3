@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css"
+    />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "IBM Plex Sans";
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+        #signupContainer {
+            display: flex;
+            flex-direction: column;
+            padding: 32px;
+            gap: 24px;
+            border: 1px solid #cdcdcd;
+            border-radius: 12px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        label {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 4px;
+            color: #7d7d7d;
+        }
+        input {
+            all: unset;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin: 2px;
+            min-width: 280px;
+            height: 32px;
+            /* color: #cdcdcd; */
+        }
+        input::placeholder {
+            color: #cdcdcd;
+        }
+        input:focus {
+            outline: 1.5px solid #00aaff;
+            border-radius: 0px 4px 4px 0px;
+        }
+        .textfield {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .textContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #cdcdcd;
+            border-radius: 6px;
+        }
+        i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6px;
+            font-size: 24px;
+            color: #7d7d7d;
+            background-color: #eef0f1;
+            border-right: 1px solid #cdcdcd;
+            border-radius: 6px 0px 0px 6px;
+        }
+        button {
+            all: unset;
+            display: flex;
+            align-self: flex-end;
+            padding: 6px;
+            padding-left: 16px;
+            padding-right: 16px;
+            width: fit-content;
+            height: fit-content;
+            font-weight: 500;
+            color: #fafafa;
+            background-color: #cdcdcd;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div id="signupContainer">
+        <h1>Sign up</h1>
+        <form>
+            <div class="textfield">
+                <label>이름</label>
+                <div class="textContainer">
+                    <i class="ph-light ph-user"></i>
+                    <input id="userName" type="text" placeholder="2 ~ 8글자 이내">
+                </div>
+            </div>
+            <div class="textfield">
+                <label>아이디</label>
+                <div class="textContainer">
+                    <i class="ph-light ph-checks"></i>
+                    <input id="id" type="text" placeholder="4 ~ 10글자 이내">
+                </div>
+            </div>
+            <div class="textfield">
+                <label>비밀번호</label>
+                <div class="textContainer">
+                    <i class="ph-light ph-lock-simple"></i>
+                    <input id="password" type="password" placeholder="대소문자, 숫자, 특수문자 포함 8자 이상">
+                </div>
+            </div>
+            <div class="textfield">
+                <label>생년월일</label>
+                <div class="textContainer">
+                    <i class="ph-light ph-calendar-blank"></i>
+                    <input id="birthday" type="date" placeholder="연도 - 월 - 일">
+                </div>
+            </div>
+            <button>완료</button>
+        </form>
+    </div>
+</body>
+</html>
