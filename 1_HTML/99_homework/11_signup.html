@@ -8,6 +8,11 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
     <title>Document</title>
     <style>
         * {
@@ -26,8 +31,13 @@
             flex-direction: column;
             padding: 32px;
             gap: 24px;
-            border: 1px solid #cdcdcd;
-            border-radius: 12px;
+            border: 1px solid #00aaff;
+            border-radius: 16px;
+        }
+        h1 {
+            font-size: 40px;
+            color: #00aaff;
+            cursor: default;
         }
         form {
             display: flex;
@@ -38,7 +48,7 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            padding-left: 4px;
+            padding-left: 6px;
             color: #7d7d7d;
         }
         input {
@@ -48,7 +58,6 @@
             margin: 2px;
             min-width: 280px;
             height: 32px;
-            /* color: #cdcdcd; */
         }
         input::placeholder {
             color: #cdcdcd;
@@ -57,11 +66,15 @@
             outline: 1.5px solid #00aaff;
             border-radius: 0px 4px 4px 0px;
         }
+        input[type="date"] {
+            color: #cdcdcd;
+        }
         .textfield {
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 8px;
+            gap: 4px;
         }
         .textContainer {
             display: flex;
@@ -76,10 +89,17 @@
             align-items: center;
             padding: 6px;
             font-size: 24px;
-            color: #7d7d7d;
-            background-color: #eef0f1;
+            color: #7a7a7a;
+            background-color: #ebeef0;
             border-right: 1px solid #cdcdcd;
-            border-radius: 6px 0px 0px 6px;
+            border-radius: 5px 0px 0px 5px;
+        }
+        .alert {
+            position: absolute;
+            bottom: -24px;
+            left: 40px;
+            font-size: 14px;
+            color: #ff0000;
         }
         button {
             all: unset;
@@ -92,7 +112,7 @@
             height: fit-content;
             font-weight: 500;
             color: #fafafa;
-            background-color: #cdcdcd;
+            background-color: #00aaffaa;
             border-radius: 6px;
         }
     </style>
@@ -107,6 +127,7 @@
                     <i class="ph-light ph-user"></i>
                     <input id="userName" type="text" placeholder="2 ~ 8글자 이내">
                 </div>
+                <span class="alert"></span>
             </div>
             <div class="textfield">
                 <label>아이디</label>
@@ -114,6 +135,7 @@
                     <i class="ph-light ph-checks"></i>
                     <input id="id" type="text" placeholder="4 ~ 10글자 이내">
                 </div>
+                <span class="alert"></span>
             </div>
             <div class="textfield">
                 <label>비밀번호</label>
@@ -121,6 +143,7 @@
                     <i class="ph-light ph-lock-simple"></i>
                     <input id="password" type="password" placeholder="대소문자, 숫자, 특수문자 포함 8자 이상">
                 </div>
+                <span class="alert"></span>
             </div>
             <div class="textfield">
                 <label>생년월일</label>
@@ -128,9 +151,58 @@
                     <i class="ph-light ph-calendar-blank"></i>
                     <input id="birthday" type="date" placeholder="연도 - 월 - 일">
                 </div>
+                <span class="alert"></span>
             </div>
-            <button>완료</button>
+            <button id="submitBtn">완료</button>
         </form>
     </div>
+    <script>
+        const userNameInput = document.getElementById("userName");
+        const idInput = document.getElementById("id");
+        const passwordInput = document.getElementById("password");
+        const birthdayInput = document.getElementById("birthday");
+
+        // 1. 이름 입력 후 focusout 시 글자 수가 1글자이거나 8글자 초과라면 경고 문구 출력
+        userNameInput.addEventListener("focusout", (ev) => {
+            const userName = userNameInput.closest(".textfield");
+            const alert = userName.querySelector(".alert");
+            const textfield = userName.querySelector(".textContainer");
+            const showIcon = userName.querySelector("showIcon");
+
+            if (userNameInput.value == "") {
+                alert.innerHTML = `이름을 입력해주세요`;
+                textfield.style.border = "1px solid #ff0000";
+            } else if (userNameInput.value.length < 2 || userNameInput.value.length > 8) {
+                alert.innerHTML = `2 ~ 8글자 이내로 입력해주세요`;
+                textfield.style.border = "1px solid #ff0000";
+            } else {
+                alert.innerHTML = ``;
+                textfield.style.border = "1px solid #00aa22";
+
+            }
+        })
+        
+        // 2. 아이디 입력 후 focusout 시 글자 수가 4글자 미만이거나 10글자 초과라면 경고 문구 출력
+        idInput.addEventListener("focusout", (ev) => {
+            const id = idInput.closest(".textfield");
+            const alert = id.querySelector(".alert");
+            const textfield = id.querySelector(".textContainer");
+            const showIcon = id.querySelector("showIcon");
+
+            if (idInput.value == "") {
+                alert.innerHTML = `이름을 입력해주세요`;
+                textfield.style.border = "1px solid #ff0000";
+            } else if (idInput.value.length < 4 || idInput.value.length > 10) {
+                alert.innerHTML = `4 ~ 10글자 이내로 입력해주세요`;
+                textfield.style.border = "1px solid #ff0000";
+            } else {
+                alert.innerHTML = ``;
+                textfield.style.border = "1px solid #00aa22";
+            }
+        })
+
+        // 3. 비밀번호 입력 후 focusout 시 글자 수가 대소문자&&숫자&&특수문자가 없으면 경고 문구 출력
+        // 완료 버튼 클릭 시 input 중 경고 상태면 경고 문구 출력, input 값이 없으면 == 빈칸이면 입력하라는 경고 문구 출력
+    </script>
 </body>
 </html>
