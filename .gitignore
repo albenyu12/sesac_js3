@@ -4,3 +4,6 @@
 # 각종 문서 파일
 *.docx
 *.pptx
+
+# node 모듈
+node_modules/
