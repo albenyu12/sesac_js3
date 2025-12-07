@@ -18,5 +18,24 @@ function generateName() {
 function generateAddress() {
     const cityIndex = Math.floor(Math.random() * cityList.length);
     
-    return addressList[cityIndex];
+    return cityList[cityIndex];
 }
+
+const csvWriter = createCsvWriter({
+    path: 'storeData.csv',
+    header: [
+        {id: 'id', title: '아이디'},
+        {id: 'name', title: '이름'},
+        {id: 'address', title: '주소'}
+    ]
+});
+
+const records = [
+    { id: generateUUID(), name: generateName(), age: generateAddress() },
+];
+
+function generateCSV(list) {
+    csvWriter.writeRecords(list);
+}
+
+generateCSV(records);

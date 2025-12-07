@@ -1,3 +1,4 @@
+const { join } = require("path");
 const { v4: uuidv4 } = require("uuid");
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const names = ["홍길동", "김길동", "박길동", "이길동"];
@@ -44,13 +45,13 @@ function generateAge() {
 }
 
 const csvWriter = createCsvWriter({
-    path: 'data.csv',
+    path: 'userData.csv',
     header: [
         {id: 'id', title: '아이디'},
         {id: 'name', title: '이름'},
         {id: 'gender', title: '성별'},
-        {id: 'bod', title: '생년월일'},
         {id: 'age', title: '나이'},
+        {id: 'bod', title: '생년월일'},
     ]
 });
 
