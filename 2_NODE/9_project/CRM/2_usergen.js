@@ -57,6 +57,7 @@ const csvWriter = createCsvWriter({
 
 const records = [
     { id: generateUUID(), name: generateName(), age: generateAge(), gender: generateGender(), bod: generateBirthday() },
+    { id: generateUUID(), name: generateName(), age: generateAge(), gender: generateGender(), bod: generateBirthday() },
 ];
 
 function generateCSV(list) {
