@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "IBM Plex Sans";
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 64px;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            height: fit-content;
+            padding: 24px;
+            gap: 16px;
+            border: 1px solid #000000;
+            border-radius: 16px;
+        }
+        #buttons {
+            display: flex;
+            gap: 8px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            border: 1px solid #000000;
+            border-radius: 8px;
+        }
+        button:hover {
+            background-color: #dadada;
+        }
+        #timeDisplay {
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="timeDisplay">00:00.00</div>
+        <div id="buttons">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+    <script>
+        let startTime, startTimeMilliseconds, startTimeSeconds, startTimeMinutes , endTime;
+
+        document.getElementById("startBtn").addEventListener("click", () => {
+            setInterval(() => {
+                time = new Date();
+                startTime = time.toLocaleTimeString().split(":");
+                startTimeSeconds = startTime.pop();
+                startTimeMinutes = startTime[1];
+                startTimeMilliseconds = Date.now();
+                document.getElementById("timeDisplay").textContent = `${(new Date()).toLocaleTimeString().split(":").pop()-startTimeSeconds}.${Math.floor((Date.now() - startTime)/10)}`;
+
+            }, 60)
+
+            // document.getElementById("timeDisplay").textContent = `${startTimeMinutes}:${startTimeSeconds}`
+
+            // console.log(startTimeSeconds);
+            // console.log(startTimeMinutes);
+            // console.log(time.getUTCMilliseconds());
+
+        })
+
+        document.getElementById("stopBtn").addEventListener("click", () => {
+            document.getElementById("timeDisplay").textContent = Math.floor((Date.now() - startTime)/10);
+        })
+
+        document.getElementById("resetBtn").addEventListener("click", () => {
+        })
+        
+    </script>
+</body>
+</html>

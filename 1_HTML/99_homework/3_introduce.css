@@ -42,7 +42,7 @@ header {
     background-color: aqua;
     padding: 16px;
     padding-left: 32px;
-    padding-right: 32px;;
+    padding-right: 32px;
 }
 .img {
     width: 144px;
@@ -93,4 +93,20 @@ header {
 }
 .projectOverview p {
     font-size: 14px;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 6%;
+    background-color: aqua;
+    padding: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+.tab, .clock {
+    display: flex;
+    background-color: #FEF49C;
 }

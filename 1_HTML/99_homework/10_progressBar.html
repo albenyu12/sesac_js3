@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #display {
+            width: 400px;
+            height: 48px;
+            background-color: #cdcdcd;
+        }
+        #progress {
+            width: 1px;
+            height: 48px;
+            background-color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progress Bar</h1>
+    <input type="number">
+    <button onclick="displayResult()">play</button>
+    <button>reset</button>
+    <div id="display">
+        <div id="progress"></div>
+    </div>
+    <script>
+        let progress = document.getElementById("progress");
+
+        function displayResult() {
+            setInterval(() => {
+                progress.style.width = "300px";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

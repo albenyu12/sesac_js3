@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>착한 아저씨 사이트에 CRUD 해보기</h1>
+    <div>
+        <h3>포스트 생성하기</h3>
+        <button id="createPost">포스트 생성</button>
+    </div>
+    <div>
+        <h3>포스트 조회하기</h3>
+        <input id="userInput" type="number" placeholder="숫자를 입력하세요">
+        <button id="prevBtn">˂</button>
+        <button id="readPost">포스트 조회</button>
+        <button id="nextBtn">˃</button>
+        <div id=""></div>
+    </div>
+    <div>
+        <h3>포스트 수정하기</h3>
+        <button id="updatePost">포스트 수정</button>
+    </div>
+    <div>
+        <h3>포스트 삭제하기</h3>
+        <button id="deletePost">포스트 삭제</button>
+    </div>
+    <div>
+        <h3>공동결과를 출력할 곳</h3>
+        <div id="result"></div>
+    </div>
+    <script>
+        const requestURL = 'https://jsonplaceholder.typicode.com/posts';
+
+        document.getElementById('createPost').addEventListener('click', () => {
+            const myPost = {
+                title: 'sesac', 
+                body: 'seoul',
+                userId: 1,
+            };
+
+            createPost(myPost);
+        });
+
+        function createPost(post) {
+            fetch(requestURL, {
+                method: 'POST',
+                headers: { 
+                    'Content-type': 'application/json' 
+                },
+                body: JSON.stringify(post), 
+            })
+                .then(response => response.json())
+                .then(data => document.getElementById('result').innerHTML = JSON.stringify(data))
+                .catch(error => alert(error));
+        };
+        
+        document.getElementById('readPost').addEventListener('click', () => {
+            let currentNum = document.getElementById('userInput').value;
+            
+            readPost(currentNum);
+
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                currentNum = currentNum - 1;
+                readPost(currentNum);
+            })
+    
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                currentNum = currentNum + 1;
+                readPost(currentNum);
+            })
+        });
+        
+        function readPost(num) {
+            const readCurrentPost = `${requestURL}/${num}`
+            fetch(readCurrentPost)
+            .then(response => response.json())
+            .then(data => document.getElementById('result').innerHTML = JSON.stringify(data));
+        };
+        
+
+        document.getElementById('updatePost').addEventListener('click', () => {
+            const myUpdatedPost = {
+                id: 1, 
+                title: 'hello',
+                body: 'world', 
+                userId: 1
+            }
+            updatePost(myUpdatedPost);
+        });
+
+        function updatePost(newPost) {
+            const updateFirstPost = `${requestURL}/1`
+            fetch(updateFirstPost, {
+                method: 'PUT', 
+                headers: {
+                    'Content-type': 'application/json'
+                }, 
+                body: JSON.stringify(newPost) // 객체 -> 문자화
+            })
+                .then(response => response.json()) // 문자 -> 객체화
+                .then(data => document.getElementById('result').innerHTML = JSON.stringify(data));
+        };
+
+        document.getElementById('deletePost').addEventListener('click', () => {
+            const deletePostId = 1;
+            deletePost(deletePostId);
+        });
+
+        function deletePost(postId) {
+            const deletePost = `${requestURL}/${postId}`;
+            fetch(deletePost, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => document.getElementById('result').innerHTML = JSON.stringify(data));
+        }
+    </script>
+</body>
+</html>

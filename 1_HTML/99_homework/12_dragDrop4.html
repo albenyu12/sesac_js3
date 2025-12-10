@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 100px;
+            gap: 40px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 2px dashed #cdcdcd;
+            color: #cdcdcd;
+        }
+        #dragItem {
+            width: 80px;
+            height: 80px;
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span>Drop here</span>
+        <div id="dragItem">Drag me</div>
+    </div>
+    <div class="container"><span>Drop here</span></div>
+    <div class="container"><span>Drop here</span></div>
+    <div class="container"><span>Drop here</span></div>
+</body>
+</html>

@@ -8,7 +8,7 @@
 <body>
     <h1>Guess the Number (1~100)</h1>
     <input id="enterNum" type="number" placeholder="Enter your guess">
-    <button onclick="guessNum()">Enter</button>
+    <button id="trail" onclick="guessNum()">Enter</button>
     <div id="guessResult"></div>
     <h2>Game History</h2>
     <div id="gameHistory"></div>
@@ -43,7 +43,7 @@
                 }
             }
             printHistory.innerHTML += "<br>";
-            count++;s
+            count++;
         }
     </script>
 </body>
