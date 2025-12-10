@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멍멍이 CEO</title>
+</head>
+<body>
+    <h1>강아지 사진 불러오기</h1>
+    <label for="breedSelect">종을 고르세요: </label>
+    <select name="breeds" id="breedSelect"></select>
+    <button id="fetchButton">사진 가져오기</button>
+    <div id="result"></div>
+    <script>
+        const requestUrl = 'https://dog.ceo/api/breeds';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const readList = `${requestUrl}/list/all`;
+            fetch(readList)
+                .then(response => response.json())
+                .then(data => 
+                {
+                    Object.keys(data.message).forEach(element => {
+                        const breedList = document.getElementById('breedSelect')
+                        breedList.innerHTML += `<option value="${element}">${element}</option>`
+                    })
+                })
+                .then(() => {
+                    document.getElementById('fetchButton').addEventListener('click', () => {
+                        const selectedBreed = document.getElementById('breedSelect').value;
+                        imgUrl = `https://dog.ceo/api/breed/${selectedBreed}/images/random`;
+                        
+                        fetch(imgUrl)
+                        .then(response => response.json())
+                        .then(data => {const result = document.getElementById('result');
+                        result.innerHTML = `<img src="${data.message}">`});
+                    })
+                })
+        })
+        </script>
+</body>
+</html>

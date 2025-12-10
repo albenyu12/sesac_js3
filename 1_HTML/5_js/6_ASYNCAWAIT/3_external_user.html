@@ -12,14 +12,17 @@
     <div id="result"></div>
 
     <script>
-        document.getElementById('loadContent').addEventListener('click', () => {
+        document.getElementById('loadContent').addEventListener('click', async () => {
             const userId = document.getElementById('userId').value;
             const requestURL = `https://jsonplaceholder.typicode.com/users/${userId}`
 
-            fetch(requestURL)
-                .then(response => checkResponseStatus(response))
-                .then(data => renderResponseToResult(data))
-                .catch(error => alert('요청한 사용자가 없습니다.'))
+            try {
+                const response = await fetch(requestURL);
+                const data = await checkResponseStatus(response);
+                renderResponseToResult(data);
+            } catch(err) {
+                alert('요청한 사용자가 없습니다.');
+            }
         });
 
         function checkResponseStatus(response) {

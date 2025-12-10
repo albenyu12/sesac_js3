@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>아직은 빈껍데기</h1>
+    <div>
+        <input id="loadId" type="number" placeholder="ID(숫자) 입력 (숫자)">
+        <button id="loadBtn">불러오기</button>
+    </div>
+    <div>
+        <input id="createTitle" type="text" placeholder="제목 입력">
+        <input id="createBody" type="text" placeholder="내용 입력">
+        <button id="createBtn">생성하기</button>
+    </div>
+    <div>
+        <input id="updateId" type="number" placeholder="수정할 ID 입력 (숫자)">
+        <input id="updateTitle" type="text" placeholder="제목 입력">
+        <input id="updateBody" type="text" placeholder="내용 입력">
+        <button id="updateBtn">수정하기</button>
+    </div>
+    <div>
+        <input id="deleteId" type="number" placeholder="삭제할 ID 입력 (숫자)">
+        <button id="deleteBtn">삭제하기</button>
+    </div>
+    <div id="result"></div>
+    <script>
+        document.getElementById('loadBtn').addEventListener('click', () => {
+            const numId = document.getElementById('loadId').value;
+            fetch('/api/posts')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerHTML = JSON.stringify(data[numId - 1]);
+            })
+        })
+        
+        let currentNum = 3;
+        document.getElementById('createBtn').addEventListener('click', () => {
+            const titleInput = document.getElementById('createTitle').value;
+            const bodyInput = document.getElementById('createBody').value;
+            fetch(`/api/posts`, {
+                method: 'POST', 
+                headers: { 'Content-type': 'application/json'}, 
+                body: JSON.stringify({
+                    id: currentNum,
+                    title: titleInput, 
+                    body: bodyInput,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerHTML = JSON.stringify(data);
+                currentNum++;
+            })
+        })
+        
+        document.getElementById('deleteBtn').addEventListener('click', () => {
+            const numId = document.getElementById('deleteId').value;
+            fetch('/api/posts')
+            .then(response => response.json())
+            .then(data => { 
+                JSON.stringify(data[numId - 1]) = '';
+            })
+        })
+    </script>
+</body>
+</html>

@@ -8,17 +8,18 @@
 <body>
     <h2>남에게 요청해서 정보 받아와서 표현하기</h2>
     <button id="loadContent">불러오기</button>
+    <div id="result"></div>
 
     <script>
         document.getElementById('loadContent').addEventListener('click', () => {
             // console.log('버튼 클릭');
             // 착한아저씨 사이트에서 100개의 글 중에 1번 글을 가져온다
             fetch('https://jsonplaceholder.typicode.com/posts/1')
-                .then(resp => {
-                    if (!resp.ok) {
+                .then(response => {
+                    if (!response.ok) {
                         throw new Error('네트워크 오류')
                     }
-                    return resp.json();
+                    return response.json();
                 })
                 .then(data => {
                     console.log('성공한 데이터는 여기에..', data);
