@@ -59,11 +59,11 @@
         
         document.getElementById('deleteBtn').addEventListener('click', () => {
             const numId = document.getElementById('deleteId').value;
-            fetch('/api/posts')
-            .then(response => response.json())
-            .then(data => { 
-                JSON.stringify(data[numId - 1]) = '';
+            fetch(`/api/posts/${numId}`, {
+                method: 'DELETE'
             })
+            .then(response => response.json())
+            .then(data => document.getElementById('result').innerHTML = JSON.stringify(data));
         })
     </script>
 </body>

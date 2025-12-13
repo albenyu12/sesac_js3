@@ -21,7 +21,9 @@ app.post('/api/posts', (req, res) => {
     res.json(newPost);
 })
 
-app.delete('/api/posts', (req, res) => {
+app.delete('/api/posts/:id', (req, res) => {
+    const id = req.params.id
+    posts[id - 1] = 0;
     res.json(posts);
 })
 
