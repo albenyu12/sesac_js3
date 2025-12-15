@@ -12,13 +12,22 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.post('/api/todo', (req, res) => {
-    const todoInput = req.body.text;
-    todoList.push(todoInput);
-    res.json(todoInput);
+    const { id, text } = req.body;
+    const newTodo = { id: parseInt(id), text };
+    todoList.push(newTodo);
+    res.json(newTodo);
 })
 
 app.get('/api/todo', (req, res) => {
     res.json(todoList);
+})
+
+app.delete('/api/todo/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = todoList.findIndex(todo => todo.id === id);
+    if (index !== -1) todoList.splice(index, 1);
+    console.log(todoList);
+    res.json({ success: true });
 })
 
 app.listen(PORT, () => {

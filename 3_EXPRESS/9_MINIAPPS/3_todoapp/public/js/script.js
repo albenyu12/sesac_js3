@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             data.forEach(item => {
                 document.getElementById('todoList').innerHTML += `
-                    <li>
+                    <li data-id=${item.id}>
                         <div class="todoContainer">
                         <input type="checkbox">
                         ${item}
                         </div>
-                        <i class="deleteIcon ph-light ph-x"></i>
+                        <i class="deleteBtn ph-light ph-x"></i>
                     </li>`;
             });
 
@@ -29,7 +29,7 @@ document.getElementById('addTodo').addEventListener('click', () => {
     fetch('/api/todo', {
         method: 'POST', 
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify({ // 문자화 또는 직렬화(serialization)이라고 한다
             id: currentNum, 
             text: newTodo
         })
@@ -38,15 +38,32 @@ document.getElementById('addTodo').addEventListener('click', () => {
         .then(data => {
             console.log(data);
             document.getElementById('todoList').innerHTML += `
-                <li>
+                <li data-id=${data.id}>
                     <div class="todoContainer">
                     <input type="checkbox">
-                    ${data}
+                    ${data.text}
                     </div>
-                    <i class="deleteIcon ph-light ph-x"></i>
+                    <i class="deleteBtn ph-light ph-x"></i>
                 </li>`;
             document.getElementById('newTodo').value = '';
         });
 
     currentNum++;
 });
+
+document.getElementById('todoList').addEventListener('click', (ev) => {
+    if(!ev.target.classList.contains('deleteBtn')) {
+        return;
+    } 
+    
+    const line = ev.target.closest('li');
+    const id = line.dataset.id;
+
+    fetch(`/api/todo/${id}`, {
+        method: 'DELETE', 
+    })
+        .then(response => response.json())
+        .then(data => {
+            line.remove();
+        })
+})
