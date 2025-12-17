@@ -7,3 +7,8 @@
 
 # node 모듈
 node_modules/
+
+# 각종 db파일
+*.db
+*.sqlite
+*.sqlite3

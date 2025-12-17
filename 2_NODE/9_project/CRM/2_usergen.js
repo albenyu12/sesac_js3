@@ -1,7 +1,25 @@
 const { join } = require("path");
 const { v4: uuidv4 } = require("uuid");
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const names = ["홍길동", "김길동", "박길동", "이길동"];
+const lastNames = [
+    '김', '이', '박', '최', '정',
+    '강', '조', '윤', '장', '임',
+    '한', '오', '서', '신', '권',
+    '황', '안', '송', '전', '홍'
+  ];
+
+const firstNames = [
+    '민준', '서준', '도윤', '예준', '시우',
+    '하준', '주원', '지후', '준우', '현우',
+    '지훈', '건우', '우진', '선우', '서진',
+    '민서', '서연', '지우', '하윤', '서현',
+    '수빈', '지민', '예은', '지윤', '채원',
+    '은서', '유진', '윤서', '다은', '소율',
+    '예린', '나연', '서영', '혜원', '수아',
+    '아린', '가은', '유나', '시은', '채은',
+    '태윤', '승민', '동현', '정우', '성민',
+    '현서', '민지', '하늘', '지안', '은우'
+  ];
 
 function generateUUID() {
     const myId = uuidv4();
@@ -10,9 +28,11 @@ function generateUUID() {
 }
 
 function generateName() {
-    const index = Math.floor(Math.random() * names.length);
-    
-    return names[index];
+    const firstNamesIndex = Math.floor(Math.random() * firstNames.length);
+    const lastNamesIndex = Math.floor(Math.random() * lastNames.length);
+    const fullName = lastNames[lastNamesIndex] + firstNames[firstNamesIndex];
+
+    return fullName;
 }
 
 function generateGender() {
@@ -55,10 +75,11 @@ const csvWriter = createCsvWriter({
     ]
 });
 
-const records = [
-    { id: generateUUID(), name: generateName(), age: generateAge(), gender: generateGender(), bod: generateBirthday() },
-    { id: generateUUID(), name: generateName(), age: generateAge(), gender: generateGender(), bod: generateBirthday() },
-];
+const lineCount = 10;
+
+const records = Array.from({ length: lineCount }, () => (
+    { id: generateUUID(), name: generateName(), age: generateAge(), gender: generateGender(), bod: generateBirthday() }
+));
 
 function generateCSV(list) {
     csvWriter.writeRecords(list);
