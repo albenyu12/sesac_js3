@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "better-sqlite3": "^12.5.0",
+    "express": "^5.2.1",
+    "fs": "^0.0.1-security",
+    "sqlite3": "^5.1.7"
   }
 }
