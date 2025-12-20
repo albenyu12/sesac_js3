@@ -1,64 +1,68 @@
 const express = require('express');
-const Database = require('./database.js');
+const Database = require('better-sqlite3');
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
+const db = new Database(path.join(__dirname, 'board.db'));
 
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
 
-const db = new Database();
-
-init_db();
-
-app.get('/api/list', (req, res) => {
-    console.log('목록 조회');
-    db.
-    res.send('목록 조회');
-});
-
-function init_db() {
-    const sql = fs.readFileSync('init_db', 'utf8');
+(() => {
+    const sql = fs.readFileSync('init_db.sql', 'utf8');
     const statements = sql.split(';');
     for (const statement of statements) {
-        db.exec(statement, (err) => {
-            if (err) {
-                console.log('이미 초기화 되었습니다. ');
-                return;
-            }
-        });
+        try {
+            db.exec(statement);
+        } catch (err) {
+            console.log('이미 초기화되었습니다. ');
+            return;
+        }
     }
-}
+})();
 
-app.post('/api/create', (req, res) => {
+//curl -X GET 127.0.0.1:3000/api/memo/board
+app.get('/api/memo/table/:table', (req, res) => {
+    const db_table = req.params.table;
+    
+    try {
+        const selectStm = db.prepare(`SELECT * FROM ${db_table}`);
+        const rows = selectStm.all();
+        console.log(rows);
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+    }
+})
+
+// curl -X GET 127.0.0.1:3000/api/memo/2
+app.get('/api/memo/:id', (req, res) => {
+    const id = Number(req.params.id);
+    console.log(id);
+    try {
+        const selectStm = db.prepare('SELECT title, message FROM board WHERE id=?');
+        const row = selectStm.get(id);
+        res.json(row);
+    } catch (err) {
+        console.error(err);
+    }
+})
+
+app.post('/api/memo/create', (req, res) => {
     const { title, message } = req.body;
-    console.log('글 작성');
-    // 비즈로직 구현
-    const sql = 'INSERT INTO users (title, message) VALUES (?, ?)'
-    const rows = db.execute(sql, [title, message]);
-    db.push(rows);
-    console.log(rows);
-    res.json({ 'result': 'success' });
-    // res.send('글 작성');
-});
+    console.log(req.body);
 
-app.delete('/api/delete', (req, res) => {
-    const id = req.body.id;
-    console.log('글 삭제');
-    const deleteSql = 'DELETE FROM users WHERE id=?';
-    db.execute(deleteSql, 1);
-
-    res.send({ success: true });
-    // res.send('글 삭제');
-});
-
-// app.modify('/api/modify', (req, res) => {
-//     console.log('글 수정');
-//     res.send('글 수정');
-// });
+    try {
+        const selectStm = db.prepare('INSERT INTO board (title, message) VALUES (?, ?)');
+        const row = selectStm.run(title, message);
+        res.json({ ok: true, ...row });
+    } catch (err) {
+        console.error(err);
+    }
+})
 
 app.listen(PORT, () => {
-    console.log('서버 레디...');
-});
+    console.log(`Server is ready on http://127.0.0.1:${PORT}`);
+})
