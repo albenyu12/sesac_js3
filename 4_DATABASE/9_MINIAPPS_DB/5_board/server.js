@@ -23,8 +23,8 @@ app.use(express.static('public'));
     }
 })();
 
-//curl -X GET 127.0.0.1:3000/api/memo/board
-app.get('/api/memo/table/:table', (req, res) => {
+//curl -X GET 127.0.0.1:3000/api/note/board
+app.get('/api/note/table/:table', (req, res) => {
     const db_table = req.params.table;
     
     try {
@@ -37,8 +37,8 @@ app.get('/api/memo/table/:table', (req, res) => {
     }
 })
 
-// curl -X GET 127.0.0.1:3000/api/memo/2
-app.get('/api/memo/:id', (req, res) => {
+// curl -X GET 127.0.0.1:3000/api/note/2
+app.get('/api/note/:id', (req, res) => {
     const id = Number(req.params.id);
     console.log(id);
     try {
@@ -50,7 +50,7 @@ app.get('/api/memo/:id', (req, res) => {
     }
 })
 
-app.post('/api/memo/create', (req, res) => {
+app.post('/api/note/create', (req, res) => {
     const { title, message } = req.body;
     console.log(req.body);
 
@@ -60,6 +60,18 @@ app.post('/api/memo/create', (req, res) => {
         res.json({ ok: true, ...row });
     } catch (err) {
         console.error(err);
+    }
+})
+
+app.delete('/api/note/:id', (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const selectStm = db.prepare('DELETE FROM board WHERE id=?');
+        const row = selectStm.run(id);
+        res.json(row);
+    } catch(err) {
+        res.status(404).send('노트를 찾을 수 없습니다. ')
     }
 })
 

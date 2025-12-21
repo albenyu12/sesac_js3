@@ -123,13 +123,8 @@ button {
 .card-item {
     display: flex;
     flex-direction: column;
-    padding: 12px;
-    padding-left: 16px;
-    padding-right: 8px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    margin-left: 12px;
-    margin-right: 12px;
+    padding: 12px 8px 12px 16px;
+    margin: 0px 12px;
     width: 92%;
     border-top: .4px solid #d1d2d555;
     border-bottom: .4px solid #d1d2d555;
@@ -186,15 +181,17 @@ button {
 }
 
 .card-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
+    height: 27px;
+    color: #222;
 }
         
 .card-message {
     font-size: 14px;
     height: 20px;
     overflow: hidden;
-    color: #7a7a7a;
+    color: #838485;
 }
 
 #right-side {
@@ -230,7 +227,7 @@ button {
 }
 
 .form-control::placeholder {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 304;
     color: #a2a2a299;
 }
@@ -242,13 +239,14 @@ button {
 
 input:read-only:focus, input:read-only ~ .form-control:focus{
     box-shadow: none;
+    cursor: default;
 }
 
 #input-title {
     font-size: 28px;
     font-weight: 480;
     height: fit-content;
-    color: #4f4f4f;
+    color: #222;
 }
 
 #input-title::placeholder {
@@ -267,4 +265,8 @@ textarea::-webkit-scrollbar {
 
 #input-text {
     flex: 1;
+    font-size: 18px;
+    height: 20px;
+    overflow: hidden;
+    color: #757679;
 }

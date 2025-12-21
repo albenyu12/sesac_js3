@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function loadBoardCards() {
-    fetch('/api/memo/table/board')
+    const cardList = document.getElementById('card-list');
+    fetch('/api/note/table/board')
     .then(response => response.json())
     .then(data => {
         console.log(data);
         data.forEach(item => {
-            cardList = document.getElementById('card-list');
-            
             const newCard = document.createElement('div');
             newCard.innerHTML = `
                     <div class="card-title">${item.title}</div>
@@ -30,7 +29,7 @@ function uploadPost() {
     const title = document.getElementById('input-title');
     const message = document.getElementById('input-text');
 
-    fetch('/api/memo/create', {
+    fetch('/api/note/create', {
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: title.value, message: message.value })
@@ -40,12 +39,34 @@ function uploadPost() {
             loadBoardCards();
             title.value = '';
             message.value = '';
-        })
+        });
 }
 
-// document.getElementById('write-btn').addEventListener('click', () => {
+function loadNewNote() {
+    const cardTitle = document.getElementById('input-title');
+    const cardMessage = document.getElementById('input-text');
+    cardTitle.value = '';
+    cardTitle.readOnly = false;
+    cardMessage.value = '';
+    cardMessage.readOnly = false;
+}
 
-// })
+document.getElementById('note-actions').addEventListener('click', (ev) => {
+    const noteAction = ev.target.closest('button');
+    console.log(noteAction.className.split(' '));
+
+    if (noteAction.className.split(' ')[0] = 'note-action--create') {
+        console.log('새 노트 가져오기 성공');
+        loadNewNote();
+    } else if(noteAction.className.split(' ')[0] = 'note-action--delete') {
+        console.log('선택한 노트 삭제하기 완료');
+        // fetch()
+    } else {
+        console.log('실패');
+
+    }
+
+});
 
 document.getElementById('left-side').addEventListener('click', (ev) => {
     console.log(ev);
@@ -58,7 +79,7 @@ document.getElementById('left-side').addEventListener('click', (ev) => {
     const cardId = ev.target.closest('.card-item').dataset.id;
     console.log(cardId);
 
-    fetch(`/api/memo/${Number(cardId)}`)
+    fetch(`/api/note/${Number(cardId)}`)
         .then(response => response.json())
         .then(data => {
             const cardTitle = document.getElementById('input-title');
@@ -67,5 +88,5 @@ document.getElementById('left-side').addEventListener('click', (ev) => {
             cardTitle.readOnly = true;
             cardMessage.value = data.message;
             cardMessage.readOnly = true;
-        })
+        });
 })
