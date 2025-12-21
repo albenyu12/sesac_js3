@@ -6,10 +6,11 @@
 }
 
 html, body {
+    display: block;
     height: 100%;
 }
 
-.memoPage { 
+.note-page { 
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -19,9 +20,9 @@ html, body {
 }
 
 main {
+    flex: 1;
     display: flex;
     flex-direction: row;
-    height: 100%;
 }
 
 header {
@@ -31,27 +32,82 @@ header {
     padding: 16px;
     padding-left: 40px;
     padding-right: 40px;
-    background-color: #fafbfd;
+    background-color: #e1e2e5;
     border-bottom: .8px solid #555657;
 }
 
-#headerLeft {
+#note-actions {
     display: flex;
     align-items: center;
-    gap: 4px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 8px;
+    background-color: #edeeef;
+    border: .4px solid #d1d2d5;
+    border-radius: 9999px;
 }
 
-#writeBtn {
-    font-size: 28px;
+button {
+    background-color: transparent;
 }
 
-#leftSide {
+#note-actions > button:hover {
+    cursor: pointer;
+    color: #3a3b3f;
+    background-color: #e1e2e5;
+    outline: .4px solid #c3c4ca;
+    border-radius: 999px;
+}
+
+.tooltip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+    padding: 8px;
+    border: unset;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  
+    background-color: #222;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 4px;
+  
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+  
+.tooltip:hover::after, .tooltip:focus-visible::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(2px);
+}
+
+.tooltip > i {
+    font-size: 24px;
+    color: #7a7a7a;
+}
+
+
+#left-side {
     width: 24%;
     height: 100%;
     background-color: #f4f5f7;
 }
 
-#cardList {
+#card-list {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -60,11 +116,11 @@ header {
     scrollbar-width: none;
 }
 
-#cardList::-webkit-scrollbar {
+#card-list::-webkit-scrollbar {
     display: none;
 }
 
-.cardItem {
+.card-item {
     display: flex;
     flex-direction: column;
     padding: 12px;
@@ -79,11 +135,11 @@ header {
     border-bottom: .4px solid #d1d2d555;
 }
 
-.cardItem:first-child {
+.card-item:first-child {
     border-top: 0px;
 }
 
-.cardItem:hover {
+.card-item:hover {
     display: flex;
     flex-direction: column;
     padding: 4px;
@@ -97,7 +153,7 @@ header {
     border-radius: 8px;
 }
 
-.cardItem:active {
+.card-item:active {
     display: flex;
     flex-direction: column;
     padding-top: 3.8px;
@@ -113,7 +169,7 @@ header {
     border-radius: 8px;
 }
 
-.cardItem:first-child:active {
+.card-item:first-child:active {
     display: flex;
     flex-direction: column;
     padding-top: 3.6px;
@@ -129,41 +185,86 @@ header {
     border-radius: 8px;
 }
 
-.cardTitle {
+.card-title {
     font-size: 18px;
     font-weight: 500;
 }
         
-.cardMessage {
+.card-message {
     font-size: 14px;
     height: 20px;
     overflow: hidden;
     color: #7a7a7a;
 }
 
-#rightSide {
+#right-side {
+    display: flex;
     width: 76%;
+    height: 100%;
     background-color: #ffffff;
 }
 
-#inputContainer { 
-    display: none;
-    padding: 48px; 
-    padding-top: 24px;
-    padding-bottom: 24px;
-    background-color: #e1e2e5; 
-    border: 1px solid #d1d2d5;
-}
-
-.formGroup { 
-    margin: 10px; 
-}
-
-.formControl::placeholder {
-    color: #a2a2a2;
-}
-
-.btnContainer {
+.form-group { 
+    flex: 1;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    scrollbar-width: none;
+    background-color: #fafbfd; 
+    border-left: 1px solid #d1d2d5;
+}
+
+.form-control {
+    font-size: 20px;
+    font-weight: 304;
+    display: flex;
+    padding: 8px;
+    padding-left: 12px;
+    width: 100%;
+    color: #8a8b8d;
+    background-color: #fafbfd;
+    border-style: none;
+}
+
+.form-control::placeholder {
+    font-size: 20px;
+    font-weight: 304;
+    color: #a2a2a299;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 .8px 0 0 #c7c9ce;
+}
+
+input:read-only:focus, input:read-only ~ .form-control:focus{
+    box-shadow: none;
+}
+
+#input-title {
+    font-size: 28px;
+    font-weight: 480;
+    height: fit-content;
+    color: #4f4f4f;
+}
+
+#input-title::placeholder {
+    font-size: 28px;
+    font-weight: 480;
+}
+
+textarea {
+    resize: none;
+    scrollbar-width: none;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+#input-text {
+    flex: 1;
 }
