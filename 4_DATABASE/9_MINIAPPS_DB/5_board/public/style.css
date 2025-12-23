@@ -110,7 +110,7 @@ button {
 #card-list {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: flex-start;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -189,6 +189,8 @@ button {
         
 .card-message {
     font-size: 14px;
+    display: flex;
+    padding-left: 2px;
     height: 20px;
     overflow: hidden;
     color: #838485;

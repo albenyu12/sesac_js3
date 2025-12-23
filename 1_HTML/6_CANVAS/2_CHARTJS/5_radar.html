@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+      
+    <script>
+        const ctx = document.getElementById('myChart');
+        // 1. 데이터 정의 (data)
+        const data = {
+            labels: [
+                '힘',
+                '체력', 
+                '지능',
+                '민첩', 
+                '운', 
+            ],
+            datasets: [{
+                label: '캐릭터 스탯',
+                data: [30, 20, 60, 40, 70],
+                backgroundColor: [
+                    '#ffaa0099',
+                ],
+                hoverOffset: 4
+            }]
+        };
+        // 2. 차트 설정 정의 (config)
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {
+                scales: {
+                    r: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+        // 3. 그린다
+        const radarChart = new Chart(ctx, config);
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="ballCanvas" width="400" height="200"></canvas>
+
+    <script>
+        const canvas = document.getElementById('ballCanvas');
+        const context = canvas.getContext('2d');
+
+        const ball = {
+            x: 50, 
+            y: 50, 
+            radius: 20,
+        }
+        
+        let yDirection = 1;
+        let xDirection = 1;
+        
+        function drawball() {
+            context.clearRect(0, 0, canvas.width, canvas.height)
+
+            context.beginPath();
+            context.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
+            context.fillStyle = '#aaff00';
+            context.fill();
+            context.closePath();
+
+            if (ball.y > canvas.height - ball.radius) {
+                yDirection = -yDirection;
+            }
+            if (ball.x > canvas.width - ball.radius) {
+                xDirection = -xDirection;
+            }
+            if (ball.y - ball.radius < 0) {
+                yDirection = -yDirection;
+            }
+            if(ball.x - ball.radius < 0 ) {
+                xDirection = -xDirection
+            }
+            ball.x += 1 * xDirection;
+            ball.y += 1 * yDirection;
+            
+            requestAnimationFrame(drawball);
+        }
+
+        drawball();
+    </script>
+</body>
+</html>

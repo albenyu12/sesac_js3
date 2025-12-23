@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="=pacCanvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('=pacCanvas');
+        const context = canvas.getContext('2d');
+
+        let pacmenSize = 30;
+        let startAngle = 0.2 * Math.PI
+        let endAngle = 1.8 * Math.PI
+        let mouthOpen = 1;
+        let positionX = 200;
+        let positionY = 200;
+        let pacmanSpeed = 1;
+        let directionX = 1;
+        let directionY = 0;
+
+        function drawPacman() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.beginPath();
+            context.moveTo(positionX, positionY);
+            context.arc(positionX, positionY, pacmanSize, startAngle, endAngle);
+            context.fillStyle = 'yellow';
+            context.fill();
+            context.closePath();
+        }
+
+        function updateMouth() {
+            if (startAngle <= 0.05 * Math.PI || startAngle >= 0.25 * Math.PI) {
+                mouthOpen = -mouthOpen;
+            }
+
+            startAngle += 0.01 * mouthOpen;
+            endAngle -= 0.01 * mouthOpen;
+        }
+
+        function updatePosition() {
+            positionX += pacmanSpeed * directionX;
+            positionY += pacmanSpeed * directionY;
+
+            if (positionX > canvas.width - pacmenSize) {
+                positionX = canvas.width - pacmenSize
+            }
+            if (positionY > canvas.height - pacmenSize) {
+                positionY = canvas.height - pacmenSize
+            }
+            if (positionX < pacmenSize) {
+                positionX = pacmenSize
+            }
+            if (positionY < pacmenSize) {
+                positionY = pacmenSize
+            }
+
+        }
+
+        function animatePacman() {
+            drawPacman();
+            updateMouth();
+            updatePosition();
+
+            requestAnimationFrame(animatePacman);
+        }
+
+        animatePacman();
+
+        document.addEventListener('keydown', (ev) => {
+            console.log('눌린키: ', ev.key);
+            switch (ev.key) {
+                case "ArrowUp":
+                    positionY -= pacmanSpeed;
+                    break;
+                case "ArrowDown":
+                    positionY += pacmanSpeed;
+                    break;
+                case "ArrowLeft":
+                    positionX -= pacmanSpeed;
+                    break;
+                case "ArrowRight":
+                    positionX += pacmanSpeed;
+                    break;
+            }
+        })
+    </script>
+</body>
+</html>

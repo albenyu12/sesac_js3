@@ -68,12 +68,25 @@ app.delete('/api/note/:id', (req, res) => {
 
     try {
         const selectStm = db.prepare('DELETE FROM board WHERE id=?');
-        const row = selectStm.run(id);
-        res.json(row);
+        selectStm.run(id);
+        res.send({ success: true });
     } catch(err) {
         res.status(404).send('노트를 찾을 수 없습니다. ')
     }
 })
+
+app.put('/api/note/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, message } = req.body;
+    try {
+        const updateNote = db.prepare(`UPDATE board SET title=?, password=? WHERE id=${id}`);
+        const row = updateNote.run(title, message);
+        console.log(row);
+        res.json(row);
+    } catch(err) {
+        res.status(404).send('업데이트 중 에러 발생..');
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is ready on http://127.0.0.1:${PORT}`);

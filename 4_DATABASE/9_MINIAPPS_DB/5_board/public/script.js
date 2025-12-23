@@ -24,10 +24,11 @@ function loadBoardCards() {
     cardList.innerHTML = '';
 }
 
-function uploadPost() {
+const title = document.getElementById('input-title');
+const message = document.getElementById('input-text');
+
+function uploadNote() {
     console.log('버튼 클릭...');
-    const title = document.getElementById('input-title');
-    const message = document.getElementById('input-text');
 
     fetch('/api/note/create', {
         method: 'POST', 
@@ -42,30 +43,59 @@ function uploadPost() {
         });
 }
 
+let selectedNoteItem = null;
+
 function loadNewNote() {
-    const cardTitle = document.getElementById('input-title');
-    const cardMessage = document.getElementById('input-text');
-    cardTitle.value = '';
-    cardTitle.readOnly = false;
-    cardMessage.value = '';
-    cardMessage.readOnly = false;
+    title.value = '';
+    title.readOnly = false;
+    message.value = '';
+    message.readOnly = false;
+}
+
+function deleteNote(item) {
+    if(!title.readOnly && !message.readOnly) {
+        console.log('노트를 선택하세요');
+    } else {
+        console.log('노트가 선택되었습니다');
+        console.log('선택한 노트 삭제 완료');
+        const cardItem = item.closest('.card-item'); 
+        console.log(`선택한 노트의 id: ${cardItem.dataset.id}`)
+        fetch(`/api/note/${cardItem.dataset.id}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(() => {
+                title.value = '';
+                title.readOnly = false;
+                message.value = '';
+                message.readOnly = false;
+            })
+            .then(loadBoardCards());
+    }
+}
+
+function updateNote() {
+    
 }
 
 document.getElementById('note-actions').addEventListener('click', (ev) => {
     const noteAction = ev.target.closest('button');
-    console.log(noteAction.className.split(' '));
+    const action = noteAction.className.split(' ')[0];
 
-    if (noteAction.className.split(' ')[0] = 'note-action--create') {
-        console.log('새 노트 가져오기 성공');
+    if (action == 'note-action--create') {
+        console.log('새 노트 로드 성공');
         loadNewNote();
-    } else if(noteAction.className.split(' ')[0] = 'note-action--delete') {
-        console.log('선택한 노트 삭제하기 완료');
+    } else if(action == 'note-action--delete') {
+        deleteNote(selectedNoteItem);
+    } else if(action == 'note-action--update') {
+        console.log('선택한 노트 수정 완료');
         // fetch()
+    } else if(action == 'note-action--complete') {
+        console.log('선택한 노트 저장 완료');
+        uploadNote();
     } else {
         console.log('실패');
-
     }
-
 });
 
 document.getElementById('left-side').addEventListener('click', (ev) => {
@@ -76,14 +106,15 @@ document.getElementById('left-side').addEventListener('click', (ev) => {
         return;
     }
 
-    const cardId = ev.target.closest('.card-item').dataset.id;
-    console.log(cardId);
+    const cardItem = ev.target.closest('.card-item');
+    selectedNoteItem = cardItem;
+    const id = cardItem.dataset.id;
+    console.log(id);
 
-    fetch(`/api/note/${Number(cardId)}`)
+    fetch(`/api/note/${id}`)
         .then(response => response.json())
         .then(data => {
-            const cardTitle = document.getElementById('input-title');
-            const cardMessage = document.getElementById('input-text');
+            
             cardTitle.value = data.title;
             cardTitle.readOnly = true;
             cardMessage.value = data.message;

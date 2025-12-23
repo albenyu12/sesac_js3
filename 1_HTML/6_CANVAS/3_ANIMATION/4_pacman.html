@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="=pacCanvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('=pacCanvas');
+        const context = canvas.getContext('2d');
+
+        let startAngle = 0.2 * Math.PI
+        let endAngle = 1.8 * Math.PI
+        let mouthOpen = 1;
+
+        function drawPacman() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.beginPath();
+            context.moveTo(350, 200);
+            context.arc(350, 200, 30, startAngle, endAngle);
+            context.fillStyle = 'yellow';
+            context.fill();
+            context.closePath();
+        }
+
+        function updateMouth() {
+            if (startAngle <= 0.05 * Math.PI || startAngle >= 0.25 * Math.PI) {
+                mouthOpen = -mouthOpen;
+            }
+
+            startAngle += 0.01 * mouthOpen;
+            endAngle -= 0.01 * mouthOpen;
+        }
+
+        function animatePacman() {
+            drawPacman();
+            updateMouth();
+
+            requestAnimationFrame(animatePacman);
+        }
+
+        animatePacman();
+    </script>
+</body>
+</html>
