@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Hello, world!</h1>
+    <button id="loadBtn" class = "btn btn-primary me-2">
+        <span class="spinner-border spinner-border-sm d-none"></span>
+        <span class="button-text">데이터 로딩</span>
+    </button>
+    
+    <button id="clearBtn" class = "btn btn-danger me-2">
+        <span class="spinner-border spinner-border-sm d-none"></span>
+        <span class="button-text">데이터 삭제</span>
+    </button>
+
+    <div id="result" class="mt-4"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+
+        // 로드 버튼
+        const loadBtn = document.getElementById('loadBtn');
+        const spinner = loadBtn.querySelector('.spinner-border');
+        const loadBtnText = loadBtn.querySelector('.button-text');
+        const result = document.getElementById('result');
+        
+        loadBtn.addEventListener('click', async() => {
+            loadBtn.disabled = true;
+            spinner.classList.remove('d-none');
+            loadBtnText.textContent = "로딩중..."
+            
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const randomId = Math.floor(Math.random() * 10) + 1;
+            
+            try {
+                const resp = await fetch(`https://jsonplaceholder.typicode.com/posts/${randomId}`);
+                const data = await resp.json();
+                result.innerHTML = `
+                <div class='alert alert-success'>
+                    <h5>${data.title}</h5>
+                    <p>${data.body}</p>
+                    `;
+                } catch(error) {
+                    result.innerHTML = `
+                    <div class='alert alert-danger'>
+                        데이터를 가져오는데 실패했습니다. 잠시후에 다시 시도해주세요. 
+                    </div>
+                        `;
+                    } finally {
+                        loadBtn.disabled = false;
+                        spinner.classList.add('d-none');
+                        loadBtnText.textContent = "데이터 로딩";
+                        clearBtn.disabled = false;
+                    }
+                })
+
+        // 클리어 버튼
+        const clearBtn = document.getElementById('clearBtn');
+        const spinner2 = clearBtn.querySelector('.spinner-border');
+        const clearBtnText = clearBtn.querySelector('.button-text');
+        clearBtn.disabled = true;
+        
+        clearBtn.addEventListener('click', async () => {
+            clearBtn.disabled = true;
+            clearBtnText.textContent = "삭제중...";
+            spinner2.classList.remove('d-none');
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const randomId = Math.floor(Math.random() * 10) + 1;
+
+            try {
+                const resp = await fetch(`https://jsonplaceholder.typicode.com/posts/${randomId}`);
+                const data = await resp.json();
+                result.innerHTML = `
+                <div class='alert alert-success'>
+                    데이터를 삭제했습니다. 
+                </div>
+                `;
+                result.innerHTML = '';
+            } catch(err) {
+                result.innerHTML = `
+                <div class='alert alert-success'>
+                    데이터를 삭제하는데 실패했습니다. 잠시후에 다시 시도해주세요. 
+                </div>
+                `;
+            } finally {
+                clearBtn.disabled = false;
+                spinner2.classList.add('d-none');
+                clearBtnText.textContent = '데이터 삭제'; 
+            }
+        })
+    </script>
+</body>
+</html>
