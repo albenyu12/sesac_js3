@@ -45,7 +45,7 @@ function generateGender() {
 }
 
 function generateBirthYear() {
-    const year = Math.floor(Math.random() * (2025 - 1950 + 1)) + 1950;
+    const year = Math.floor(Math.random() * (2025 - 1960 + 1)) + 1960;
 
     return year;
 }
@@ -60,7 +60,7 @@ function generateBirthday() {
 
 function generateAge() {
     const year = generateBirthYear();
-    const age = 2025 - year +1;
+    const age = 2025 - year + 1;
     return age;
 }
 
@@ -75,7 +75,7 @@ const csvWriter = createCsvWriter({
     ]
 });
 
-const lineCount = 10;
+const lineCount = 100;
 
 const records = Array.from({ length: lineCount }, () => (
     { id: generateUUID(), name: generateName(), age: generateAge(), gender: generateGender(), bod: generateBirthday() }
