@@ -9,26 +9,29 @@ const db = new Database(path.join(__dirname, 'user-sample.db'));
 app.use(express.json());
 app.use(express.static('public'));
 
-// curl -X GET 127.0.0.1:3000/api/crm/users
+// // curl -X GET 127.0.0.1:3000/api/crm/users
+// app.get('/api/crm/users', (req, res) => {
+//     try {
+//         const selectStm = db.prepare('SELECT * FROM users ORDER BY Id LIMIT 10');
+//         const rows = selectStm.all();
+//         // console.log(rows);
+//         res.json(rows);
+//     } catch (err) {
+//         console.log(err);
+//     }
+// })
+
+// curl -X GET "127.0.0.1:3000/api/crm/users?page=1&size=10"
 app.get('/api/crm/users', (req, res) => {
-    try {
-        const selectStm = db.prepare('SELECT * FROM users LIMIT 10');
-        const rows = selectStm.all();
-        // console.log(rows);
-        res.json(rows);
-    } catch (err) {
-        console.log(err);
-    }
-})
-
-// curl -X GET 127.0.0.1:3000/api/crm/users/b94a544a-87a0-4696-9863-eb3b1c140291
-app.get('/api/crm/users/:id', (req, res) => {
-    const id = req.params.id;
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+    const offset = (page - 1) * size;
+    const sql = `SELECT * FROM users ORDER BY Id LIMIT ? OFFSET ?`
 
     try {
-        const selectStm = db.prepare('SELECT * FROM users LIMIT 10 OFFSET (?-1)*10');
-        const row = selectStm.get(id);
-        console.log(row);
+        const selectStm = db.prepare(sql);
+        const rows = selectStm.all(size, offset);
+        console.log(rows);
     } catch (err) {
         console.log(err);
     }

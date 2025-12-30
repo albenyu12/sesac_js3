@@ -21,3 +21,44 @@ function getUserList() {
             });
         })
 }
+
+let page = 1;
+const size = 10;
+
+function getUserListPage() {
+    const userList = document.getElementById('userList');
+    const url = `/api/crm/users?page=${page}&size=${size}`
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                <td>${item.Id}</td>
+                <td>${item.Name}</td>
+                <td>${item.Gender}</td>
+                <td>${item.Age}</td>
+                <td>${item.Birthdate}</td>
+                `;
+                userList.appendChild(newRow);
+            });
+        })
+}
+
+let pageNum = 1;
+
+document.querySelector('nav').addEventListener('click', (ev) => {
+    // console.log(ev.target);
+
+    if (ev.target.textContent.trim() == '»') {
+        pageNum += 1;
+        console.log(pageNum);
+    } else if (ev.target.textContent.trim() == '«') {
+        pageNum -= 1;
+        console.log(pageNum);
+    } else {
+        pageNum = parseInt(ev.target.textContent.trim());
+        console.log(pageNum);
+    }
+})
