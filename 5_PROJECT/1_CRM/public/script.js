@@ -1,34 +1,16 @@
 document.addEventListener('DOMContentLoaded', () =>{
-    getUserList();
+    getUserListPage();
 })
 
-// 사용자 목록 조회
-function getUserList() {
-    const userList = document.getElementById('userList');
-    fetch('/api/crm/users')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(item => {
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                <td>${item.Id}</td>
-                <td>${item.Name}</td>
-                <td>${item.Gender}</td>
-                <td>${item.Age}</td>
-                <td>${item.Birthdate}</td>
-                `;
-                userList.appendChild(newRow);
-            });
-        })
-}
-
-let page = 1;
+let currentPageNum = 1;
 const size = 10;
 
+// 사용자 목록 조회
 function getUserListPage() {
     const userList = document.getElementById('userList');
-    const url = `/api/crm/users?page=${page}&size=${size}`
+    const url = `/api/crm/users?page=${currentPageNum}&size=${size}`
 
+    userList.innerHTML = '';
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -46,19 +28,22 @@ function getUserListPage() {
         })
 }
 
-let pageNum = 1;
-
+// 페이지네이션
 document.querySelector('nav').addEventListener('click', (ev) => {
-    // console.log(ev.target);
+    const selectedPageNum = ev.target.textContent.trim();
 
-    if (ev.target.textContent.trim() == '»') {
-        pageNum += 1;
-        console.log(pageNum);
-    } else if (ev.target.textContent.trim() == '«') {
-        pageNum -= 1;
-        console.log(pageNum);
+    if (ev.target.className != "page-link") {
+        return;
     } else {
-        pageNum = parseInt(ev.target.textContent.trim());
-        console.log(pageNum);
+        if (selectedPageNum == '»') {
+            currentPageNum += 1;
+            getUserListPage();
+        } else if (selectedPageNum == '«') {
+            currentPageNum -= 1;
+            getUserListPage();
+        } else {
+            currentPageNum = parseInt(selectedPageNum);
+            getUserListPage();
+        }
     }
 })

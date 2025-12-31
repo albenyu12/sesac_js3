@@ -9,19 +9,7 @@ const db = new Database(path.join(__dirname, 'user-sample.db'));
 app.use(express.json());
 app.use(express.static('public'));
 
-// // curl -X GET 127.0.0.1:3000/api/crm/users
-// app.get('/api/crm/users', (req, res) => {
-//     try {
-//         const selectStm = db.prepare('SELECT * FROM users ORDER BY Id LIMIT 10');
-//         const rows = selectStm.all();
-//         // console.log(rows);
-//         res.json(rows);
-//     } catch (err) {
-//         console.log(err);
-//     }
-// })
-
-// curl -X GET "127.0.0.1:3000/api/crm/users?page=1&size=10"
+// curl -X GET "127.0.0.1:3000/api/crm/users?page=2&size=10"
 app.get('/api/crm/users', (req, res) => {
     const page = parseInt(req.query.page);
     const size = parseInt(req.query.size);
@@ -31,7 +19,8 @@ app.get('/api/crm/users', (req, res) => {
     try {
         const selectStm = db.prepare(sql);
         const rows = selectStm.all(size, offset);
-        console.log(rows);
+        // console.log(rows);
+        res.json(rows);
     } catch (err) {
         console.log(err);
     }
