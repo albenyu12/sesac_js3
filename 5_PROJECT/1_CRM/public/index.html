@@ -30,8 +30,8 @@
               </li>
             </ul>
             <form class="d-flex" role="search"></form>
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+              <button id="searchBtn" class="btn btn-primary" type="submit">Search</button>
             </form>
           </div>
         </div>
@@ -52,16 +52,16 @@
         </tbody>
     </table>
 
-    <nav aria-label="...">
+    <nav id="pagination" aria-label="...">
         <ul class="pagination">
           <li class="page-item disabled">
             <a class="page-link">&laquo;</a>
           </li>
           <li class="page-item active"><a class="page-link" href="#" aria-current="page">1</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
           <li class="page-item">
             <a class="page-link" href="#">&raquo;</a>
           </li>

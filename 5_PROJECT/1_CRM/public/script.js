@@ -2,13 +2,14 @@ document.addEventListener('DOMContentLoaded', () =>{
     getUserListPage();
 })
 
+let userInput = '';
 let currentPageNum = 1;
 const size = 10;
 
 // 사용자 목록 조회
 function getUserListPage() {
+    const url = `/api/crm/users?name=${userInput}&page=${currentPageNum}&size=${size}`
     const userList = document.getElementById('userList');
-    const url = `/api/crm/users?page=${currentPageNum}&size=${size}`
 
     userList.innerHTML = '';
     fetch(url)
@@ -29,21 +30,32 @@ function getUserListPage() {
 }
 
 // 페이지네이션
-document.querySelector('nav').addEventListener('click', (ev) => {
-    const selectedPageNum = ev.target.textContent.trim();
+function pagination(selectedPageNum) {
+    if (selectedPageNum == '»') {
+        currentPageNum += 1;
+        getUserListPage();
+    } else if (selectedPageNum == '«') {
+        currentPageNum -= 1;
+        getUserListPage();
+    } else {
+        currentPageNum = parseInt(selectedPageNum);
+        getUserListPage();
+    }
+}
+
+document.getElementById('pagination').addEventListener('click', (ev) => {
+    const selectedBtn = ev.target.textContent.trim();
 
     if (ev.target.className != "page-link") {
         return;
     } else {
-        if (selectedPageNum == '»') {
-            currentPageNum += 1;
-            getUserListPage();
-        } else if (selectedPageNum == '«') {
-            currentPageNum -= 1;
-            getUserListPage();
-        } else {
-            currentPageNum = parseInt(selectedPageNum);
-            getUserListPage();
-        }
+        pagination(selectedBtn);
     }
+})
+
+document.getElementById('searchBtn').addEventListener('click', () => {
+    currentPageNum = 1;
+    userInput = document.getElementById('searchInput').value.trim();
+
+    getUserListPage();
 })
