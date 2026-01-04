@@ -19,12 +19,10 @@ app.get('/api/crm/users', (req, res) => {
     let sql = `SELECT * FROM users`
     let params = [];
 
-    // if (!name) {
-    //     return;
-    // } else {
-    //     sql += ` WHERE Name LIKE ?`;
-    //     params.push(`%${name}%`);
-    // }
+    if (name) {
+        sql += ` WHERE Name LIKE ?`;
+        params.push(`%${name}%`);
+    }
 
     // if (!gender) {
     //     sql += ` AND Gender = ?`;

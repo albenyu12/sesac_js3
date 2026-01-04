@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
     getUserListPage();
 })
 
@@ -30,29 +30,50 @@ function getUserListPage() {
 }
 
 // 페이지네이션
-function pagination(selectedPageNum) {
+function pagination(selectedPage) {
+    const selectedPageNum = selectedPage.textContent.trim();
+    const pageItems = document.querySelectorAll('.page-item');
+
+    pageItems.forEach(item => {
+        item.classList.remove('active');
+    });
+
     if (selectedPageNum == '»') {
-        currentPageNum += 1;
+        currentPageNum ++;
         getUserListPage();
     } else if (selectedPageNum == '«') {
-        currentPageNum -= 1;
+        currentPageNum --;
         getUserListPage();
     } else {
         currentPageNum = parseInt(selectedPageNum);
+        selectedPage.classList.add('active');
         getUserListPage();
     }
+
+    if (currentPageNum > 1) {
+        document.querySelector('.page-item').classList.remove('disabled');
+    } else {
+        document.querySelector('.page-item').classList.add('disabled');
+    }
+
+    pageItems.forEach(item => {
+        if (item.textContent == currentPageNum) {
+            item.classList.add('active');
+        }
+    })
 }
 
 document.getElementById('pagination').addEventListener('click', (ev) => {
-    const selectedBtn = ev.target.textContent.trim();
+    const selectedBtn = ev.target.closest('li');
 
-    if (ev.target.className != "page-link") {
+    if (!selectedBtn) {
         return;
     } else {
         pagination(selectedBtn);
     }
 })
 
+// 사용자 이름 검색
 document.getElementById('searchBtn').addEventListener('click', () => {
     currentPageNum = 1;
     userInput = document.getElementById('searchInput').value.trim();
