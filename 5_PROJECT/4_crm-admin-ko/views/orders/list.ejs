@@ -1,0 +1,50 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<h1>주문 수</h1>
+
+<form class="card row wrap gap" method="get" action="/orders">
+  <div class="seg">
+    <a class="seg-item <%= range==='all'?'active':'' %>" href="/orders?range=all">전체</a>
+    <a class="seg-item <%= range==='30d'?'active':'' %>" href="/orders?range=30d">최근 30일</a>
+  </div>
+
+  <input name="q" placeholder="Search external_id or id" value="<%= q %>" />
+
+  <select name="store_id">
+    <option value="">Store (전체)</option>
+    <% stores.forEach(s => { %>
+      <option value="<%= s.id %>" <%= (storeId===s.id)?'selected':'' %>><%= s.name %></option>
+    <% }) %>
+  </select>
+
+  <select name="customer_id">
+    <option value="">Customer (전체)</option>
+    <% customers.forEach(c => { %>
+      <option value="<%= c.id %>" <%= (customerId===c.id)?'selected':'' %>><%= c.name %></option>
+    <% }) %>
+  </select>
+
+  <input type="hidden" name="range" value="<%= range %>"/>
+  <button class="btn secondary" type="submit">Apply</button>
+</form>
+
+<div class="card">
+  <table>
+    <thead><tr><th>ID</th><th>External</th><th>Customer</th><th>Store</th><th>Ordered At</th><th>Total</th></tr></thead>
+    <tbody>
+      <% rows.forEach(o => { %>
+        <tr>
+          <td><a href="/orders/<%= o.id %>"><%= o.id %></a></td>
+          <td><%= o.external_id || '' %></td>
+          <td><a href="/customers/<%= o.customer_id %>"><%= o.customer_name %></a></td>
+          <td><a href="/stores/<%= o.store_id %>"><%= o.store_name %></a></td>
+          <td><%= o.ordered_at %></td>
+          <td><%= o.order_total_amount %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

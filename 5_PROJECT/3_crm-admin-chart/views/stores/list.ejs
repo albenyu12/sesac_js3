@@ -1,0 +1,29 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="row space">
+  <h1>Stores</h1>
+  <a class="btn" href="/stores/new">New</a>
+</div>
+
+<form class="card row gap" method="get" action="/stores">
+  <input name="q" placeholder="Search store name" value="<%= q %>" />
+  <button class="btn secondary" type="submit">Apply</button>
+</form>
+
+<div class="card">
+  <table>
+    <thead><tr><th>ID</th><th>Name</th><th>Orders</th></tr></thead>
+    <tbody>
+    <% rows.forEach(r => { %>
+      <tr>
+        <td><%= r.id %></td>
+        <td><a href="/stores/<%= r.id %>"><%= r.name %></a></td>
+        <td><%= r.order_count %></td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

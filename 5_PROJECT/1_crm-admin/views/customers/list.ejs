@@ -1,0 +1,58 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="row space">
+  <h1>Customers</h1>
+  <a class="btn" href="/customers/new">New</a>
+</div>
+
+<form class="card row gap" method="get" action="/customers">
+  <input name="q" placeholder="Search external_id or name" value="<%= q %>" />
+  <select name="gender">
+    <option value="">Gender (All)</option>
+    <option value="M" <%= gender==='M'?'selected':'' %>>M</option>
+    <option value="F" <%= gender==='F'?'selected':'' %>>F</option>
+  </select>
+  <select name="pageSize">
+    <% [10,20,50,100].forEach(n => { %>
+      <option value="<%= n %>" <%= pageSize===n?'selected':'' %>><%= n %>/page</option>
+    <% }) %>
+  </select>
+  <button class="btn secondary" type="submit">Apply</button>
+</form>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>ID</th><th>External ID</th><th>Name</th><th>Gender</th><th>Birthdate</th><th>Orders</th></tr>
+    </thead>
+    <tbody>
+    <% rows.forEach(r => { %>
+      <tr>
+        <td><%= r.id %></td>
+        <td><%= r.external_id %></td>
+        <td><a href="/customers/<%= r.id %>"><%= r.name %></a></td>
+        <td><%= r.gender || '' %></td>
+        <td><%= r.birthdate || '' %></td>
+        <td><%= r.order_count %></td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+
+  <div class="pager">
+    <% const lastPage = Math.max(Math.ceil(total / pageSize), 1); %>
+    <div class="muted">Total: <%= total %></div>
+    <div class="row gap">
+      <% if (page > 1) { %>
+        <a class="btn secondary" href="?q=<%= encodeURIComponent(q) %>&gender=<%= gender %>&pageSize=<%= pageSize %>&page=<%= page-1 %>">Prev</a>
+      <% } %>
+      <div class="muted">Page <%= page %> / <%= lastPage %></div>
+      <% if (page < lastPage) { %>
+        <a class="btn secondary" href="?q=<%= encodeURIComponent(q) %>&gender=<%= gender %>&pageSize=<%= pageSize %>&page=<%= page+1 %>">Next</a>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

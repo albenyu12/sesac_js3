@@ -1,0 +1,32 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="row space">
+  <h1>Product #<%= product.id %> - <%= product.name %></h1>
+  <div class="row gap">
+    <a class="btn secondary" href="/products/<%= product.id %>/edit">수정</a>
+    <form method="post" action="/products/<%= product.id %>/delete" onsubmit="return confirm('삭제 product? (fails if used in orders)');">
+      <button class="btn danger" type="submit">삭제</button>
+    </form>
+  </div>
+</div>
+
+<div class="grid two">
+  <div class="card">
+    <h2>Info</h2>
+    <div class="kv">
+      <div class="k">price</div><div class="v"><%= product.price %></div>
+      <div class="k">created</div><div class="v"><%= product.created_at %></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Stats</h2>
+    <div class="kv">
+      <div class="k">qty_sum</div><div class="v"><%= stats.qty_sum %></div>
+      <div class="k">revenue</div><div class="v"><%= stats.revenue %></div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

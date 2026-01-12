@@ -35,9 +35,9 @@ app.get('/api/crm/users', (req, res) => {
 
     try {
         console.log(params);
-
         const selectStm = db.prepare(sql);
         const rows = selectStm.all(params);
+
         res.json(rows);
     } catch (err) {
         console.log(err);

@@ -1,0 +1,19 @@
+<header class="topbar">
+  <div class="brand"><a href="/dashboard">CRM Admin</a></div>
+  <nav class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/stores">Stores</a>
+    <a href="/products">Products</a>
+    <a href="/orders">Orders</a>
+    <a href="/data">Data</a>
+  </nav>
+  <div class="right">
+    <% if (user) { %>
+      <form method="post" action="/logout">
+        <button class="btn secondary" type="submit">Logout</button>
+      </form>
+    <% } %>
+  </div>
+</header>
+<main class="container">

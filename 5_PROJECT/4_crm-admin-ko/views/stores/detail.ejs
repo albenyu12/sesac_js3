@@ -1,0 +1,70 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="row space">
+  <h1>Store #<%= store.id %> - <%= store.name %></h1>
+  <div class="row gap">
+    <a class="btn secondary" href="/stores/<%= store.id %>/edit">수정</a>
+    <form method="post" action="/stores/<%= store.id %>/delete" onsubmit="return confirm('삭제 store? (fails if orders exist)');">
+      <button class="btn danger" type="submit">삭제</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="row space">
+    <h2>Analysis</h2>
+    <div class="seg">
+      <a class="seg-item <%= range==='all'?'active':'' %>" href="/stores/<%= store.id %>?range=all">전체</a>
+      <a class="seg-item <%= range==='30d'?'active':'' %>" href="/stores/<%= store.id %>?range=30d">최근 30일</a>
+    </div>
+  </div>
+
+  <h3>Monthly 매출</h3>
+  <table>
+    <thead><tr><th>YM</th><th>주문 수</th><th>매출</th><th>Unique 고객</th></tr></thead>
+    <tbody>
+      <% monthly.forEach(r => { %>
+        <tr>
+          <td><%= r.ym %></td>
+          <td><%= r.order_count %></td>
+          <td><%= r.revenue %></td>
+          <td><%= r.unique_customers %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h3>Loyal 고객 Top 10</h3>
+  <table>
+    <thead><tr><th>Customer</th><th>주문 수</th><th>Last</th></tr></thead>
+    <tbody>
+      <% loyal.forEach(r => { %>
+        <tr>
+          <td><a href="/customers/<%= r.id %>"><%= r.name %></a> <span class="muted">(<%= r.external_id %>)</span></td>
+          <td><%= r.order_count %></td>
+          <td><%= r.last_ordered_at %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Recent 주문 수</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Customer</th><th>Ordered At</th><th>Total</th></tr></thead>
+    <tbody>
+      <% orders.forEach(o => { %>
+        <tr>
+          <td><a href="/orders/<%= o.id %>"><%= o.id %></a></td>
+          <td><a href="/customers/<%= o.customer_id %>"><%= o.customer_name %></a></td>
+          <td><%= o.ordered_at %></td>
+          <td><%= o.order_total_amount %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

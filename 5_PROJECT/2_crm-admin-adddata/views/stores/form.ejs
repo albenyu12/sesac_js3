@@ -1,0 +1,17 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<h1><%= mode==='new' ? 'New Store' : 'Edit Store' %></h1>
+<% if (error) { %><p class="error"><%= error %></p><% } %>
+
+<form class="card form" method="post" action="<%= mode==='new' ? '/stores/new' : '/stores/' + row.id + '/edit' %>">
+  <label>name</label>
+  <input name="name" value="<%= row?.name || '' %>" required />
+
+  <div class="row gap">
+    <button class="btn" type="submit">Save</button>
+    <a class="btn secondary" href="/stores">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

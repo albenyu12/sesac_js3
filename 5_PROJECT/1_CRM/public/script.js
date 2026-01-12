@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let userInput = '';
 let currentPageNum = 1;
-const size = 10;
+let size = 10;
 
 // 사용자 목록 조회
 function getUserListPage() {
@@ -40,14 +40,11 @@ function pagination(selectedPage) {
 
     if (selectedPageNum == '»') {
         currentPageNum ++;
-        getUserListPage();
     } else if (selectedPageNum == '«') {
         currentPageNum --;
-        getUserListPage();
     } else {
         currentPageNum = parseInt(selectedPageNum);
         selectedPage.classList.add('active');
-        getUserListPage();
     }
 
     if (currentPageNum > 1) {
@@ -64,12 +61,13 @@ function pagination(selectedPage) {
 }
 
 document.getElementById('pagination').addEventListener('click', (ev) => {
-    const selectedBtn = ev.target.closest('li');
+    const selectedBtn = ev.target.closest('.page-item');
 
     if (!selectedBtn) {
         return;
     } else {
         pagination(selectedBtn);
+        getUserListPage();
     }
 })
 

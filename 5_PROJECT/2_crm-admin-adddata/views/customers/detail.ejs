@@ -1,0 +1,89 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="row space">
+  <h1>Customer #<%= customer.id %> - <%= customer.name %></h1>
+  <div class="row gap">
+    <a class="btn secondary" href="/customers/<%= customer.id %>/edit">Edit</a>
+    <form method="post" action="/customers/<%= customer.id %>/delete" onsubmit="return confirm('Delete customer? (fails if orders exist)');">
+      <button class="btn danger" type="submit">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="grid two">
+  <div class="card">
+    <h2>Profile</h2>
+    <div class="kv">
+      <div class="k">external_id</div><div class="v"><%= customer.external_id %></div>
+      <div class="k">gender</div><div class="v"><%= customer.gender || '' %></div>
+      <div class="k">birthdate</div><div class="v"><%= customer.birthdate || '' %></div>
+      <div class="k">created</div><div class="v"><%= customer.created_at %></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row space">
+      <h2>Analysis</h2>
+      <div class="seg">
+        <a class="seg-item <%= range==='all'?'active':'' %>" href="/customers/<%= customer.id %>?range=all">All</a>
+        <a class="seg-item <%= range==='30d'?'active':'' %>" href="/customers/<%= customer.id %>?range=30d">Last 30 days</a>
+      </div>
+    </div>
+
+    <div class="grid kpi mini">
+      <div class="tile"><div class="muted">Orders</div><div class="big"><%= summary.order_count %></div></div>
+      <div class="tile"><div class="muted">Revenue</div><div class="big"><%= summary.revenue %></div></div>
+      <div class="tile"><div class="muted">AOV</div><div class="big"><%= Math.round(summary.aov) %></div></div>
+      <div class="tile"><div class="muted">Last Order</div><div class="big"><%= summary.last_ordered_at || '-' %></div></div>
+    </div>
+
+    <h3>Top 5 Stores (by order count)</h3>
+    <table>
+      <thead><tr><th>Store</th><th>Orders</th><th>Last</th></tr></thead>
+      <tbody>
+        <% topStores.forEach(r => { %>
+          <tr>
+            <td><a href="/stores/<%= r.id %>"><%= r.name %></a></td>
+            <td><%= r.order_count %></td>
+            <td><%= r.last_ordered_at %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <h3>Top 5 Products (by qty)</h3>
+    <table>
+      <thead><tr><th>Product</th><th>Qty</th><th>Last</th></tr></thead>
+      <tbody>
+        <% topProducts.forEach(r => { %>
+          <tr>
+            <td><a href="/products/<%= r.id %>"><%= r.name %></a></td>
+            <td><%= r.qty_sum %></td>
+            <td><%= r.last_ordered_at %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Recent Orders</h2>
+  <table>
+    <thead><tr><th>ID</th><th>External</th><th>Store</th><th>Ordered At</th><th>Total</th></tr></thead>
+    <tbody>
+      <% orders.forEach(o => { %>
+        <tr>
+          <td><a href="/orders/<%= o.id %>"><%= o.id %></a></td>
+          <td><%= o.external_id || '' %></td>
+          <td><a href="/stores/<%= o.store_id %>"><%= o.store_name %></a></td>
+          <td><%= o.ordered_at %></td>
+          <td><%= o.order_total_amount %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

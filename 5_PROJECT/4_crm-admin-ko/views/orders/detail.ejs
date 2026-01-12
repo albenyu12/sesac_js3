@@ -1,0 +1,33 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<h1>Order #<%= order.id %></h1>
+
+<div class="card">
+  <div class="kv">
+    <div class="k">external_id</div><div class="v"><%= order.external_id || '' %></div>
+    <div class="k">customer</div><div class="v"><a href="/customers/<%= order.customer_id %>"><%= order.customer_name %></a> <span class="muted">(<%= order.customer_external_id %>)</span></div>
+    <div class="k">store</div><div class="v"><a href="/stores/<%= order.store_id %>"><%= order.store_name %></a></div>
+    <div class="k">ordered_at</div><div class="v"><%= order.ordered_at %></div>
+    <div class="k">total</div><div class="v"><%= order.order_total_amount %></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>주문 상품</h2>
+  <table>
+    <thead><tr><th>Product</th><th>Qty</th><th>Unit</th><th>Line</th></tr></thead>
+    <tbody>
+      <% items.forEach(it => { %>
+        <tr>
+          <td><a href="/products/<%= it.product_id %>"><%= it.product_name %></a></td>
+          <td><%= it.qty %></td>
+          <td><%= it.unit_price %></td>
+          <td><%= it.line_amount %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

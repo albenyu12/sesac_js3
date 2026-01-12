@@ -1,0 +1,30 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<h1><%= mode==='new' ? 'New Customer' : 'Edit Customer' %></h1>
+<% if (error) { %><p class="error"><%= error %></p><% } %>
+
+<form class="card form" method="post" action="<%= mode==='new' ? '/customers/new' : '/customers/' + row.id + '/edit' %>">
+  <label>external_id</label>
+  <input name="external_id" value="<%= row?.external_id || '' %>" required />
+
+  <label>name</label>
+  <input name="name" value="<%= row?.name || '' %>" required />
+
+  <label>gender</label>
+  <select name="gender">
+    <option value="">(empty)</option>
+    <option value="M" <%= row?.gender==='M'?'selected':'' %>>M</option>
+    <option value="F" <%= row?.gender==='F'?'selected':'' %>>F</option>
+  </select>
+
+  <label>birthdate (YYYY-MM-DD)</label>
+  <input name="birthdate" value="<%= row?.birthdate || '' %>" placeholder="1990-01-01" />
+
+  <div class="row gap">
+    <button class="btn" type="submit">Save</button>
+    <a class="btn secondary" href="/customers">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

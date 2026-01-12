@@ -1,0 +1,71 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<h1>Dashboard</h1>
+
+<div class="row">
+  <div class="card">
+    <div class="row space">
+      <div>
+        <div class="muted">Range</div>
+        <div class="seg">
+          <a class="seg-item <%= range==='all'?'active':'' %>" href="/dashboard?range=all">All-time</a>
+          <a class="seg-item <%= range==='30d'?'active':'' %>" href="/dashboard?range=30d">Last 30 days</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid kpi">
+  <div class="card"><div class="muted">Revenue</div><div class="big"><%= kpi.revenue %></div></div>
+  <div class="card"><div class="muted">Orders</div><div class="big"><%= kpi.order_count %></div></div>
+  <div class="card"><div class="muted">Unique Customers</div><div class="big"><%= kpi.unique_customers %></div></div>
+  <div class="card"><div class="muted">AOV</div><div class="big"><%= Math.round(kpi.aov) %></div></div>
+</div>
+
+
+<div class="card">
+  <h2>Monthly Revenue Chart</h2>
+  <canvas id="monthlyRevenueChart"
+    data-rows='<%- JSON.stringify(storeMonthly) %>'></canvas>
+</div>
+
+<div class="grid two">
+
+  <div class="card">
+    <h2>Top Stores</h2>
+    <table>
+      <thead><tr><th>Store</th><th>Orders</th><th>Revenue</th></tr></thead>
+      <tbody>
+        <% topStores.forEach(r => { %>
+          <tr>
+            <td><a href="/stores/<%= r.id %>"><%= r.name %></a></td>
+            <td><%= r.order_count %></td>
+            <td><%= r.revenue %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Store Monthly Revenue (sample)</h2>
+    <div class="muted">Recent rows (limit 200). Add charts later if needed.</div>
+    <table>
+      <thead><tr><th>YM</th><th>Store</th><th>Orders</th><th>Revenue</th></tr></thead>
+      <tbody>
+        <% storeMonthly.forEach(r => { %>
+          <tr>
+            <td><%= r.ym %></td>
+            <td><a href="/stores/<%= r.store_id %>"><%= r.store_name %></a></td>
+            <td><%= r.order_count %></td>
+            <td><%= r.revenue %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
